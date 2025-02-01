@@ -8,19 +8,20 @@ directory = "/images"
 
 def load_images_coordinates(directory):
     imageFilePaths = []
-    #note: file names should be in this format latitude_longitude.jpg
+    #note: file names should be in this format latitude$decimal_longitude$decimal.jpg
     imageCoordinates = []
     for file in os.listdir(directory):
         imageFilePaths.append(os.path.join(directory, file))
-        coordinates = file.split('_') #split into array with latitude and longitude
-        imageCoordinates.append([float(coordinates[0]), float(coordinates[1])])
+        coordinates = file.split('.')[0].split('_') #split into array with latitude and longitude
+        longitude_str, latitude_str = coordinates[0].replace("$", "."), coordinates[1].replace("$", ".")
+        imageCoordinates.append([float(longitude_str), float(latitude_str)])
     return imageFilePaths, np.array(imageCoordinates)  #tensorflow wants data as an np array
 
 training_directory = os.path.join(directory, "train")
 test_directory = os.path.join(directory, "test")
 
-train_paths, train_coordinates = load_images_coordinates(training_directory)
-test_paths, test_coordinates = load_images_coordinates(test_directory)
+train_paths, train_coordinates = load_images_coordinates("./images/test")
+test_paths, test_coordinates = load_images_coordinates("./images/train")
 
 def data_generator(image_paths, coordinates, batch_image_size, target_img_size=(224, 224)):
     while True:
@@ -48,7 +49,7 @@ base_model.trainable = False
 
 model = models.Sequential([
     base_model,
-    layers.GlobalAveragePooling2D(),
+    layers.GlobalAveragePooling2D(), #used to translate 2-d data into 1-d data
     layers.Dropout(0.2),
     layers.Dense(128, activation='relu'),
     layers.Dense(2)  #outputs latitude and longitude
@@ -82,3 +83,5 @@ def predict_coordinates(image_path):
     image_array = tf.expand_dims(image_array, axis=0)  
     predictions = model.predict(image_array)
     return predictions[0]  #latitude, longitude pair
+
+print(predict_coordinates("./testModel/test1.png"))
