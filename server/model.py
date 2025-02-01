@@ -23,7 +23,6 @@ test_directory = os.path.join(directory, "test")
 train_paths, train_coordinates = load_images_coordinates("./images/test")
 test_paths, test_coordinates = load_images_coordinates("./images/train")
 
-print(train_paths)
 
 
 
@@ -32,8 +31,6 @@ def data_generator(image_paths, coordinates, batch_image_size, target_img_size=(
         for i in range(0, len(image_paths), batch_image_size):
             batch_paths = image_paths[i:i + batch_image_size]
             batch_coords = coordinates[i:i + batch_image_size]
-            print(batch_paths)
-            print(batch_coords)
             images = []
             for path in batch_paths:
                 image = tf.keras.utils.load_img(path, target_size=target_img_size)
@@ -71,8 +68,7 @@ model.compile(
 # 4. Train the model
 steps_per_epoch = len(train_paths) // 2
 validation_steps = len(test_paths) // 2
-print(steps_per_epoch)
-print(validation_steps)
+
 history = model.fit(
     train_generator,
     validation_data=val_generator,
