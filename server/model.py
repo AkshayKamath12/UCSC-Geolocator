@@ -13,7 +13,7 @@ def load_images_coordinates(directory):
     for file in os.listdir(directory):
         imageFilePaths.append(os.path.join(directory, file))
         coordinates = file.split('_') #split into array with latitude and longitude
-        imageCoordinates.append([coordinates[0], coordinates[1]])
+        imageCoordinates.append([float(coordinates[0]), float(coordinates[1])])
     return imageFilePaths, np.array(imageCoordinates)  #tensorflow wants data as an np array
 
 training_directory = os.path.join(directory, "train")
