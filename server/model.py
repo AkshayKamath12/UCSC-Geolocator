@@ -23,11 +23,17 @@ test_directory = os.path.join(directory, "test")
 train_paths, train_coordinates = load_images_coordinates("./images/test")
 test_paths, test_coordinates = load_images_coordinates("./images/train")
 
+print(train_paths)
+
+
+
 def data_generator(image_paths, coordinates, batch_image_size, target_img_size=(224, 224)):
     while True:
         for i in range(0, len(image_paths), batch_image_size):
             batch_paths = image_paths[i:i + batch_image_size]
             batch_coords = coordinates[i:i + batch_image_size]
+            print(batch_paths)
+            print(batch_coords)
             images = []
             for path in batch_paths:
                 image = tf.keras.utils.load_img(path, target_size=target_img_size)
@@ -35,13 +41,14 @@ def data_generator(image_paths, coordinates, batch_image_size, target_img_size=(
                 images.append(image)
             yield np.array(images), np.array(batch_coords)
 
-train_generator = data_generator(train_paths, train_coordinates, 20) #setting images per batch to 20
-val_generator = data_generator(test_paths, test_coordinates, 20)
+batch_img_size = 1
+train_generator = data_generator(train_paths, train_coordinates, batch_img_size)
+val_generator = data_generator(test_paths, test_coordinates, batch_img_size)
 
 
-base_model = tf.keras.applications.EfficientNetB0(
-    include_top=False,
-    input_shape=(224, 224, 3),
+base_model = tf.keras.applications.MobileNetV2(
+    input_shape=(224, 224, 3), 
+    include_top=False, 
     weights='imagenet'
 )
 
@@ -57,14 +64,15 @@ model = models.Sequential([
 
 model.compile(
     optimizer=tf.keras.optimizers.Adam(learning_rate=0.001),
-    loss='mse',  # mean squared Error
-    metrics=['mae']  # mean absolute error
+    loss='mse',  #mean squared error
+    metrics=['mae']  #mean absolute error
 )
 
 # 4. Train the model
-steps_per_epoch = len(train_paths) // 20
-validation_steps = len(test_paths) // 20
-
+steps_per_epoch = len(train_paths) // 2
+validation_steps = len(test_paths) // 2
+print(steps_per_epoch)
+print(validation_steps)
 history = model.fit(
     train_generator,
     validation_data=val_generator,
@@ -74,14 +82,16 @@ history = model.fit(
     verbose=1
 )
 
-model.save("geolocator.h5")
+model.save("geolocator.keras")
 
+test_model_directory = "\\images\\testModel"
 #main function
-def predict_coordinates(image_path):
-    image = tf.keras.utils.load_img(image_path, target_size=(224, 224))
+def predict_coordinates(file_name):
+    image_path = os.path.join(test_model_directory, file_name)
+    image = tf.keras.utils.load_img(file_name, target_size=(224, 224))
     image_array = tf.keras.utils.img_to_array(image) / 255.0
     image_array = tf.expand_dims(image_array, axis=0)  
     predictions = model.predict(image_array)
     return predictions[0]  #latitude, longitude pair
 
-print(predict_coordinates("./testModel/test1.png"))
+print(predict_coordinates("./images/train\\37$00_-122$06.png"))

@@ -1,2 +1,5 @@
 **/myenv
 **/.env
+**/__pycache__
+**/geolocator.h5
+**/geolocator.keras
