@@ -66,8 +66,8 @@ model.compile(
 )
 
 # 4. Train the model
-steps_per_epoch = len(train_paths) // 20
-validation_steps = len(test_paths) // 20
+steps_per_epoch = len(train_paths) // batch_img_size
+validation_steps = len(test_paths) // batch_img_size
 
 history = model.fit(
     train_generator,
