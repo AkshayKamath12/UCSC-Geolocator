@@ -38,7 +38,7 @@ def data_generator(image_paths, coordinates, batch_image_size, target_img_size=(
                 images.append(image)
             yield np.array(images), np.array(batch_coords)
 
-batch_img_size = 1
+batch_img_size = 20
 train_generator = data_generator(train_paths, train_coordinates, batch_img_size)
 val_generator = data_generator(test_paths, test_coordinates, batch_img_size)
 
@@ -66,8 +66,8 @@ model.compile(
 )
 
 # 4. Train the model
-steps_per_epoch = len(train_paths) // 2
-validation_steps = len(test_paths) // 2
+steps_per_epoch = len(train_paths) // 20
+validation_steps = len(test_paths) // 20
 
 history = model.fit(
     train_generator,
@@ -83,11 +83,10 @@ model.save("geolocator.keras")
 test_model_directory = "\\images\\testModel"
 #main function
 def predict_coordinates(file_name):
-    image_path = os.path.join(test_model_directory, file_name)
     image = tf.keras.utils.load_img(file_name, target_size=(224, 224))
     image_array = tf.keras.utils.img_to_array(image) / 255.0
     image_array = tf.expand_dims(image_array, axis=0)  
     predictions = model.predict(image_array)
     return predictions[0]  #latitude, longitude pair
 
-print(predict_coordinates("./images/train\\37$00_-122$06.png"))
+print(predict_coordinates("./images/testModel\\test1.png"))
