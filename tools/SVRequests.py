@@ -54,5 +54,5 @@ def fetch_streetview_images(api_key, size="600x300", fov=90, heading = 0, pitch 
                 print(f'Error fetching image for {lat},{lon} heading {direction}: {response.status_code}')
 
 if __name__ == '__main__':
-    API_KEY = 'AIzaSyDNT_TTu4oM_fkOtlvE7hFgTb6qRKtFa-M'
+    API_KEY = 'Your-Api-Key-Here'
     fetch_streetview_images(API_KEY)
