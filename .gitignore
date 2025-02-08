@@ -1,3 +1,4 @@
 **/myenv
 **/.env
 /output/
+tools/output/*.jpg
