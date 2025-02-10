@@ -21,7 +21,7 @@ def load_images_coordinates(directory):
 
         min_lat, max_lat = min(min_lat, lat), max(max_lat, lat)
         min_lon, max_lon = min(min_lon, lon), max(max_lon, lon)
-
+    #print("{} + {} + {} + {}".format(min_lat, max_lat, min_lon, max_lon))
     return imageFilePaths, np.array(imageCoordinates), (min_lat, max_lat, min_lon, max_lon)
 
 
