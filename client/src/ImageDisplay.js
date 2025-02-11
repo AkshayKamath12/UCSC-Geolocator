@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-function ImageDisplay() {
+function ImageDisplay({setCoordinates}) {
   const [image, setImage] = useState(null);
   const [preview, setPreview] = useState(null);
 
@@ -27,11 +27,15 @@ function ImageDisplay() {
             res => res.json()
         ).then(
             data =>{
-                console.log(data)
+              if(data.prediction){
+                console.log(data.prediction);
+                setCoordinates(data.prediction);
+              }
+                
             }
         )
       } catch(err){
-        console.log(err)
+          console.log(err)
       }
     }    
   };

@@ -33,11 +33,10 @@ def upload_image():
         image_array = tf.keras.utils.img_to_array(image) / 255.0
         image_array = tf.expand_dims(image_array, axis=0)
         predictions = model.predict(image_array)
-        predictions = denormalize_predicted_coordinates(predictions, min_lat, max_lat, min_lon, max_lon)
+        predictions = denormalize_predicted_coordinates(predictions, min_lat, max_lat, min_lon, max_lon)[0]
         os.remove(new_filename)
         print(predictions)
-        
-        return jsonify({'message': 'File uploaded'}), 200
+        return jsonify({'prediction': predictions.tolist()}), 200
     else:
         return jsonify({'error': 'Invalid file'}), 400
     
