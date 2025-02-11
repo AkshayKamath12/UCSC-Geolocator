@@ -1,12 +1,15 @@
 # How to use app on Akshay's branch:
 
+
 ## Backend server:
 
 1) Open one terminal and go to the server directory.
 2) Do ```python -m venv myenv```
 3) On windows, do ```myenv/scripts/activate```
 4) Install dependencies through ```pip install -r requirements.txt```
-5) Run Flask server through ```python main.py```
+5) Run ```python model.py``` and make sure geolocator.keras is created in the server directory
+6) Create a folder called **upload** in **server/images** (this is just for temporarily storing uploaded photos)
+6) Run Flask server through ```python main.py```
 
 ## Frontend server:
 

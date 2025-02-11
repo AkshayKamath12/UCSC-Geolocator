@@ -103,15 +103,3 @@ history = model.fit(
 )
 
 model.save("geolocator.keras")
-
-
-def predict_coordinates(file_name):
-    image = tf.keras.utils.load_img(file_name, target_size=(224, 224))
-    image_array = tf.keras.utils.img_to_array(image) / 255.0
-    image_array = tf.expand_dims(image_array, axis=0)
-
-    predictions = model.predict(image_array)
-    predictions = denormalize_coordinates(predictions)
-    return predictions[0] 
-
-print(predict_coordinates("images/test\\37$000133_-122$061568_NE.jpg"))
