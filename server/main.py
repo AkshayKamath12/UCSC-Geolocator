@@ -3,6 +3,7 @@ from flask_cors import CORS
 import os
 import tempfile
 import tensorflow as tf
+from tensorflow import keras
 import numpy as np
 
 app = Flask(__name__)
@@ -24,8 +25,18 @@ def upload_image():
     if file and allowed(file.filename):
         filename, extension = file.filename.split('.')
         new_filename = generate_temp_upload_filename(filename, "." + extension)  
+        print(new_filename)
         file.save(os.path.join('images/upload', new_filename))
-        #predict_coordinates(new_filename)
+        model = keras.models.load_model("geolocator.keras")
+
+        image = tf.keras.utils.load_img(new_filename, target_size=(224, 224))
+        image_array = tf.keras.utils.img_to_array(image) / 255.0
+        image_array = tf.expand_dims(image_array, axis=0)
+        predictions = model.predict(image_array)
+        predictions = denormalize_predicted_coordinates(predictions, min_lat, max_lat, min_lon, max_lon)
+        os.remove(new_filename)
+        print(predictions)
+        
         return jsonify({'message': 'File uploaded'}), 200
     else:
         return jsonify({'error': 'Invalid file'}), 400
