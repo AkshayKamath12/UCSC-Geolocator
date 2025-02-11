@@ -1,4 +1,4 @@
-# How to use app on Akshay's branch:
+# How to use app:
 
 
 ## Backend server:
@@ -20,4 +20,4 @@
 5) This should open a new tab in your browser.
 6) Add an image and click upload.
 
-**View the predicted coordinates in the terminal for the Flask server.**
+**View the predicted coordinates in the terminal for the Flask server or the console window.**
