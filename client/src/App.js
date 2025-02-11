@@ -1,22 +1,18 @@
-import logo from './logo.svg';
-import './App.css';
+import ImageDisplay from './ImageDisplay';
+import { useState } from 'react';
 
 function App() {
+  const [coordinates, setCoordinates] = useState([]);
+  
+  if(coordinates.length > 0){
+    console.log(coordinates);
+  }
+  
+
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        <ImageDisplay setCoordinates={setCoordinates}/>
       </header>
     </div>
   );
