@@ -2,3 +2,9 @@
 **/.env
 /output/
 tools/output/*.jpg
+**/__pycache__
+**/geolocator.h5
+**/geolocator.keras
+**/server/images/fixFileName
+/server/images/replace.py
+**/server/images/upload
