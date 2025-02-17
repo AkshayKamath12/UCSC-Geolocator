@@ -1,0 +1,44 @@
+.headerContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  background-color: #ffffff;
+  width: 100%;
+  height: 80px; /* Set a fixed height for the header */
+}
+
+.headerContent {
+  display: flex;
+  align-items: center;
+}
+
+.headerTextContainer {
+  margin-right: 20px;
+}
+
+.headerTitle {
+  font-family: 'Roboto', sans-serif;
+  font-size: 24px;
+  font-weight: 500;
+  color: #333333;
+}
+
+.headerSubtitle {
+  font-family: 'Roboto', sans-serif;
+  font-size: 14px;
+  color: #666666;
+}
+
+.headerImageContainer {
+  display: flex;
+  align-items: center;
+  height: 100%; /* Make the container full height of header */
+}
+
+.headerImage {
+  height: 100%; /* Make the image fill the container height */
+  width: auto;
+  object-fit: contain; /* Maintain aspect ratio */
+  padding: 10px; /* Add some padding so it's not touching the edges */
+}
