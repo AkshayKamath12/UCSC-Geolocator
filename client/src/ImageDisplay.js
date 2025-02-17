@@ -1,13 +1,12 @@
 import React, { useState } from 'react';
-import { BuildingBlocks } from './index.jsx';
 
-function ImageDisplay({ setCoordinates }) {
+function ImageDisplay({setCoordinates}) {
   const [image, setImage] = useState(null);
   const [preview, setPreview] = useState(null);
 
   const handleImageChange = (e) => {
     const file = e.target.files[0];
-    console.log(file);
+    console.log(file)
     if (file) {
       setImage(file);
       setPreview(URL.createObjectURL(file));
@@ -15,37 +14,45 @@ function ImageDisplay({ setCoordinates }) {
   };
 
   const uploadImage = async () => {
-    if (image) {
-      console.log(image);
+    if (image){
+      console.log(image)
       const imageData = new FormData();
-      imageData.append('image', image);
+      imageData.append('image', image)
 
       try {
-        await fetch('/upload', {
-          method: 'POST',
-          body: imageData,
-        })
-          .then((res) => res.json())
-          .then((data) => {
-            if (data.prediction) {
-              console.log(data.prediction);
-              setCoordinates(data.prediction);
+        await fetch("/upload", {
+            method: 'POST',
+            body: imageData
+        }).then(
+            res => res.json()
+        ).then(
+            data =>{
+              if(data.prediction){
+                console.log(data.prediction);
+                setCoordinates(data.prediction);
+              }
+                
             }
-          });
-      } catch (err) {
-        console.log(err);
+        )
+      } catch(err){
+          console.log(err)
       }
-    }
+    }    
   };
 
   return (
     <div className="ImageDisplay">
-      <BuildingBlocks />
       <h1>Upload and Display Image</h1>
-
-      <input type="file" accept="image/*" onChange={handleImageChange} />
-
-      <button onClick={uploadImage}>Upload Image</button>
+      
+      <input
+        type="file"
+        accept="image/*"
+        onChange={handleImageChange}
+      />
+    
+      <button onClick = {uploadImage}>
+        Upload Image
+      </button>
 
       {preview && (
         <div className="image-preview">
