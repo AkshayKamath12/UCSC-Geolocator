@@ -1,14 +1,9 @@
 import React, { useState } from 'react';
-import ImageDisplay from './ImageDisplay';
 import BuildingBlocksContent from './BuildingBlocksContent/BuildingBlocksContent';
 import HeroActions from './HeroActions';
 
 function App() {
   const [coordinates, setCoordinates] = useState([]);
-
-  if (coordinates.length > 0) {
-    console.log(coordinates);
-  }
 
   return (
     <div className="App">
@@ -18,12 +13,13 @@ function App() {
           buttonGroupAlign="center"
           buttonGroupButtonClassName="button1"
           buttonGroupButtonClassNameOverride="button2"
-          buttonGroupText="Paste from clipboard"
+          buttonGroupText="Upload Here"
           platform="desktop"
           textContentTitleSubtitle="or click the button"
           textContentTitleTitle="Drag an image here"
+          setCoordinates={setCoordinates}
         />
-        <ImageDisplay setCoordinates={setCoordinates} />
+        {/* Remove ImageDisplay component since functionality is now in HeroActions */}
       </header>
     </div>
   );

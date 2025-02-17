@@ -51,7 +51,7 @@
 
 .button {
   border-radius: 8px;
-  background-color: #e3e3e3;
+  background-color: #F3EEDA; /* Sand color */
   border: 1px solid #767676;
   overflow: hidden;
   display: flex;
@@ -59,6 +59,16 @@
   align-items: center;
   justify-content: center;
   padding: 12px;
+  transition: background-color 0.3s, transform 0.2s;
+  cursor: pointer;
+}
+
+.button:hover {
+  background-color: #dec9a2; /* Slightly darker sand color for hover effect */
+}
+
+.button:active {
+  transform: scale(0.95);
 }
 
 .button1 {
@@ -77,4 +87,17 @@
   justify-content: center;
   padding: 12px;
   color: #f5f5f5;
+}
+
+.previewContainer {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.previewImage {
+  max-width: 300px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
