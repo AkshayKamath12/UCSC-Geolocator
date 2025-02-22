@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import BuildingBlocksContent from './BuildingBlocksContent/BuildingBlocksContent';
 import HeroActions from './HeroActions';
+import ImageDisplay from './ImageDisplay';
+import MapDisplay from './MapDisplay';
 
 function App() {
   const [coordinates, setCoordinates] = useState([]);
@@ -19,7 +21,8 @@ function App() {
           textContentTitleTitle="Drag an image here"
           setCoordinates={setCoordinates}
         />
-        {/* Remove ImageDisplay component since functionality is now in HeroActions */}
+        <ImageDisplay setCoordinates={setCoordinates} />
+        <MapDisplay coordinates={coordinates} />
       </header>
     </div>
   );
