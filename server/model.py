@@ -1,105 +1,46 @@
-import tensorflow as tf
-from tensorflow.keras import layers, models, regularizers
+import torch
+from geoclip import GeoCLIP, train
+from geoclip.train import eval_images
+import torch.nn as nn
 import os
-import numpy as np
+import pandas as pd
 
-directory = "/images"
-
-def load_images_coordinates(directory):
-    imageFilePaths = []
-    imageCoordinates = []
-
-    min_lat, max_lat = float('inf'), float('-inf')
-    min_lon, max_lon = float('inf'), float('-inf')
-
-    for file in os.listdir(directory):
-        imageFilePaths.append(os.path.join(directory, file))
-        coordinates = file.split('.')[0].split('_') 
-        longitude_str, latitude_str = coordinates[0].replace("$", "."), coordinates[1].replace("$", ".")
-        lat, lon = float(longitude_str), float(latitude_str)
-        imageCoordinates.append([lat, lon])
-
-        min_lat, max_lat = min(min_lat, lat), max(max_lat, lat)
-        min_lon, max_lon = min(min_lon, lon), max(max_lon, lon)
-    #print("{} + {} + {} + {}".format(min_lat, max_lat, min_lon, max_lon))
-    return imageFilePaths, np.array(imageCoordinates), (min_lat, max_lat, min_lon, max_lon)
+def load_gps_data(csv_file):
+    data = pd.read_csv(csv_file)
+    lat_lon = data[['LAT', 'LON']]
+    gps_tensor = torch.tensor(lat_lon.values, dtype=torch.float32)
+    return gps_tensor
 
 
+class Geolocator:
+    def __init__(self, use_trained=False, queue_size=4096):
+        self.model = GeoCLIP(queue_size=queue_size)
+        # self.device = "cpu"
+        self.device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+        self.model.to(self.device)
 
-train_paths, train_coordinates, (min_lat, max_lat, min_lon, max_lon) = load_images_coordinates("images/train")
-test_paths, test_coordinates, _ = load_images_coordinates("images/test")
+        if use_trained:
+            self.load_weights()
+            self.model.gps_gallery = load_gps_data(os.path.join(os.getcwd(), "weights/coords.csv"))
 
+    def predict(self, image_path, top_k=1):
+        return self.model.predict(image_path, top_k=top_k)
 
-def normalize_coordinates(coords):
-    lat = (coords[:, 0] - min_lat) / (max_lat - min_lat)
-    lon = (coords[:, 1] - min_lon) / (max_lon - min_lon)
-    return np.stack([lat, lon], axis=1)
+    def train(self, train_dataloader, epoch, batch_size, scheduler=None, criterion=nn.CrossEntropyLoss()):
+        optimizer = torch.optim.Adam(self.model.parameters(), lr=0.0001)
+        train(train_dataloader, self.model, optimizer, epoch, batch_size, self.device, scheduler=scheduler, criterion=criterion)
 
-def denormalize_coordinates(coords):
-    lat = coords[:, 0] * (max_lat - min_lat) + min_lat
-    lon = coords[:, 1] * (max_lon - min_lon) + min_lon
-    return np.stack([lat, lon], axis=1)
+    # def test(self, val_dataloader):
+    #     return eval_images(val_dataloader, self.model, self.device)
 
-train_coordinates = normalize_coordinates(train_coordinates)
-test_coordinates = normalize_coordinates(test_coordinates)
+    #load weights from specified files below
+    def load_weights(self):
+        self.model.image_encoder.mlp.load_state_dict(torch.load("weights/image_encoder_mlp_weights.pth", map_location=torch.device("cpu")))
+        self.model.location_encoder.load_state_dict(torch.load("weights/location_encoder_weights.pth", map_location=torch.device("cpu")))
+        self.model.logit_scale = nn.Parameter(torch.load("weights/logit_scale_weights.pth", map_location=torch.device("cpu")))
 
-
-def data_generator(image_paths, coordinates, batch_size, target_size=(224, 224)):
-    while True:
-        for i in range(0, len(image_paths), batch_size):
-            batch_paths = image_paths[i:i + batch_size]
-            batch_coords = coordinates[i:i + batch_size]
-            images = []
-            for path in batch_paths:
-                image = tf.keras.utils.load_img(path, target_size=target_size)
-                image = tf.keras.utils.img_to_array(image) / 255.0  
-                images.append(image)
-            yield np.array(images), np.array(batch_coords)
-
-batch_size = 32
-train_generator = data_generator(train_paths, train_coordinates, batch_size)
-val_generator = data_generator(test_paths, test_coordinates, batch_size)
-
-
-base_model = tf.keras.applications.MobileNetV2(
-    input_shape=(224, 224, 3), 
-    include_top=False, 
-    weights='imagenet'
-)
-
-base_model.trainable = True
-for layer in base_model.layers[:-50]:
-    layer.trainable = False
-
-model = models.Sequential([
-    base_model,
-    layers.GlobalAveragePooling2D(),
-    layers.Dropout(0.1),
-    layers.Dense(512, activation='relu', kernel_regularizer=regularizers.l2(0.001)),
-    layers.Dense(256, activation='relu', kernel_regularizer=regularizers.l2(0.001)),
-    layers.Dense(128, activation='relu', kernel_regularizer=regularizers.l2(0.001)),
-    layers.Dense(2, activation='sigmoid')
-])
-
-
-model.compile(
-    optimizer=tf.keras.optimizers.Adam(learning_rate=0.0001),
-    loss='mse',
-    metrics=['mae']
-)
-
-
-epochs = 100 
-steps_per_epoch = len(train_paths) // batch_size
-validation_steps = len(test_paths) // batch_size
-
-history = model.fit(
-    train_generator,
-    validation_data=val_generator,
-    steps_per_epoch=steps_per_epoch,
-    validation_steps=validation_steps,
-    epochs=epochs,
-    verbose=1
-)
-
-model.save("geolocator.keras")
+    #save weights to the specified files below
+    def save_weights(self):
+        torch.save(self.model.image_encoder.mlp.state_dict(), "weights/image_encoder_mlp_weights.pth")
+        torch.save(self.model.location_encoder.state_dict(), "weights/location_encoder_weights.pth")
+        torch.save(self.model.logit_scale, "weights/logit_scale_weights.pth")
