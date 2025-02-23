@@ -5,12 +5,13 @@ import tempfile
 import tensorflow as tf
 from tensorflow import keras
 import numpy as np
+import random
 
 app = Flask(__name__)
 CORS(app)
 allowed_extensions = {"png", "jpg"}
-min_lat = 36.999301
-max_lat = 37.000198
+min_lat = 36.97721
+max_lat = 37.163271552426
 min_lon = -122.064474
 max_lon = -122.061568
 
@@ -33,16 +34,17 @@ def upload_image():
         new_filename = generate_temp_upload_filename(filename, "." + extension)   
         print(new_filename)
         file.save(os.path.join('images/upload', new_filename))
-        model = keras.models.load_model(model_path)
-
-        image = tf.keras.utils.load_img(new_filename, target_size=(224, 224))
-        image_array = tf.keras.utils.img_to_array(image) / 255.0
-        image_array = tf.expand_dims(image_array, axis=0)
-        predictions = model.predict(image_array)
-        predictions = denormalize_predicted_coordinates(predictions, min_lat, max_lat, min_lon, max_lon)[0]
+        
+        # Generate pseudo-random coordinates for testing
+        # TESTING
+        lat = random.uniform(min_lat, max_lat)
+        lon = random.uniform(min_lon, max_lon)
+        predictions = [lat, lon]
+        
         os.remove(new_filename)
         print(predictions)
-        return jsonify({'prediction': predictions.tolist()}), 200
+        return jsonify({'prediction': predictions}), 200
+        # TESTING
     else:
         return jsonify({'error': 'Invalid file'}), 400
     

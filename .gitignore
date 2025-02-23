@@ -9,3 +9,6 @@ tools/output/*.jpg
 /server/images/replace.py
 **/server/images/upload
 **/server/images/output
+**/server/images/test
+**/server/images/testModel
+**/server/images/train
