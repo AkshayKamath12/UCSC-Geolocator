@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import BuildingBlocksContent from './BuildingBlocksContent/BuildingBlocksContent';
 import HeroActions from './HeroActions';
-import MapDisplay from './MapDisplay';
-import ImageDisplay from './ImageDisplay/ImageDisplay';
+import MapDisplay from './MapDisplay/MapDisplay';
 
 function App() {
   const [coordinates, setCoordinates] = useState([]);
