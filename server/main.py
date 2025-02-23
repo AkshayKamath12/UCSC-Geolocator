@@ -14,9 +14,15 @@ max_lat = 37.000198
 min_lon = -122.064474
 max_lon = -122.061568
 
+# Get the directory of the current script
+script_dir = os.path.dirname(os.path.abspath(__file__))
+model_path = os.path.join(script_dir, "geolocator.keras")
+
+# Print the model path to verify it
+print(f"Model path: {model_path}")
+
 @app.route('/upload', methods=['POST'])
 def upload_image():
-    
     if 'image' not in request.files:
         return jsonify({'error': 'No file'}), 400
     
@@ -24,10 +30,10 @@ def upload_image():
     
     if file and allowed(file.filename):
         filename, extension = file.filename.split('.')
-        new_filename = generate_temp_upload_filename(filename, "." + extension)  
+        new_filename = generate_temp_upload_filename(filename, "." + extension)   
         print(new_filename)
         file.save(os.path.join('images/upload', new_filename))
-        model = keras.models.load_model("geolocator.keras")
+        model = keras.models.load_model(model_path)
 
         image = tf.keras.utils.load_img(new_filename, target_size=(224, 224))
         image_array = tf.keras.utils.img_to_array(image) / 255.0

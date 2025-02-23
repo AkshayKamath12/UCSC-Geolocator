@@ -9,17 +9,22 @@ function HeroActions({
   platform,
   textContentTitleSubtitle,
   textContentTitleTitle,
-  setCoordinates
+  setCoordinates,
+  setFile,
+  file // Add file prop
 }) {
-  const [image, setImage] = useState(null);
   const [preview, setPreview] = useState(null);
 
   const handleImageChange = async (e) => {
-    const file = e.target.files[0];
+    const selectedFile = e.target.files[0];
+    if (selectedFile) {
+      setFile(selectedFile);
+      setPreview(URL.createObjectURL(selectedFile));
+    }
+  };
+
+  const handleImageSubmit = async () => {
     if (file) {
-      setImage(file);
-      setPreview(URL.createObjectURL(file));
-      
       const imageData = new FormData();
       imageData.append('image', file);
 
@@ -59,6 +64,14 @@ function HeroActions({
       {preview && (
         <div className={styles.previewContainer}>
           <img src={preview} alt="Preview" className={styles.previewImage} />
+          <div className={`${styles.buttonGroup} ${buttonGroupAlign}`}>
+            <button
+              className={`${styles.button} ${buttonGroupButtonClassName} ${buttonGroupButtonClassNameOverride}`}
+              onClick={handleImageSubmit}
+            >
+              Submit Image
+            </button>
+          </div>
         </div>
       )}
     </div>
