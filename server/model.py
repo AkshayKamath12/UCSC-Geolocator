@@ -24,11 +24,8 @@ def load_images_coordinates(directory):
     #print("{} + {} + {} + {}".format(min_lat, max_lat, min_lon, max_lon))
     return imageFilePaths, np.array(imageCoordinates), (min_lat, max_lat, min_lon, max_lon)
 
-
-
 train_paths, train_coordinates, (min_lat, max_lat, min_lon, max_lon) = load_images_coordinates("images/train")
 test_paths, test_coordinates, _ = load_images_coordinates("images/test")
-
 
 def normalize_coordinates(coords):
     lat = (coords[:, 0] - min_lat) / (max_lat - min_lat)
@@ -42,7 +39,6 @@ def denormalize_coordinates(coords):
 
 train_coordinates = normalize_coordinates(train_coordinates)
 test_coordinates = normalize_coordinates(test_coordinates)
-
 
 def data_generator(image_paths, coordinates, batch_size, target_size=(224, 224)):
     while True:
@@ -59,7 +55,6 @@ def data_generator(image_paths, coordinates, batch_size, target_size=(224, 224))
 batch_size = 32
 train_generator = data_generator(train_paths, train_coordinates, batch_size)
 val_generator = data_generator(test_paths, test_coordinates, batch_size)
-
 
 base_model = tf.keras.applications.MobileNetV2(
     input_shape=(224, 224, 3), 
