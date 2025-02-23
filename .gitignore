@@ -8,3 +8,4 @@ tools/output/*.jpg
 **/server/images/fixFileName
 /server/images/replace.py
 **/server/images/upload
+**/server/images/output
