@@ -19,8 +19,7 @@ max_lon = -122.04819
 script_dir = os.path.dirname(os.path.abspath(__file__))
 model_path = os.path.join(script_dir, "geolocator.keras")
 
-# Print the model path to verify it
-print(f"Model path: {model_path}")
+model = keras.models.load_model(model_path)
 
 @app.route('/upload', methods=['POST'])
 def upload_image():
