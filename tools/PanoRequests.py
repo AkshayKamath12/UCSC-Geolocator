@@ -80,7 +80,7 @@ async def fetch_streetview_images(api_key, size="600x300", fov=90, heading=0, pi
     print(f'\nCompleted: {successful}/{len(tasks)} images downloaded successfully')
 
 if __name__ == '__main__':
-    API_KEY = 'AIzaSyAtuWV7L75PLoEnGWrQtOERWD-70IW_ppE'
+    API_KEY = 'API_KEY'
     
     # Run the async function
     asyncio.run(fetch_streetview_images(API_KEY))
