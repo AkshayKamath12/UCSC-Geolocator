@@ -4,6 +4,14 @@ import os
 import re
 import numpy as np
 
+# Ensure TensorFlow uses the GPU
+physical_devices = tf.config.list_physical_devices('GPU')
+if len(physical_devices) > 0:
+    tf.config.experimental.set_memory_growth(physical_devices[0], True)
+    print("GPU is available and configured.")
+else:
+    print("GPU is not available.")
+
 directory = "/images"
 
 def load_images_coordinates(directory):
