@@ -10,10 +10,6 @@ from model import Geolocator
 app = Flask(__name__)
 CORS(app)
 allowed_extensions = {"png", "jpg"}
-min_lat = 36.999301
-max_lat = 37.000198
-min_lon = -122.064474
-max_lon = -122.061568
 
 model = Geolocator(use_trained=True)
 
@@ -28,7 +24,6 @@ def upload_image():
     if file and allowed(file.filename):
         filename, extension = file.filename.split('.')
         new_filename = generate_temp_upload_filename(filename, "." + extension)  
-        print(new_filename)
         file.save(os.path.join('images/upload', new_filename))
         predict_coords, _ = model.predict(new_filename, 1)
         os.remove(new_filename)
