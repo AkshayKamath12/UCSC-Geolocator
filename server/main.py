@@ -11,9 +11,9 @@ app = Flask(__name__)
 CORS(app)
 allowed_extensions = {"png", "jpg"}
 min_lat = 36.97721
-max_lat = 37.163271552426
-min_lon = -122.064474
-max_lon = -122.061568
+max_lat = 37.0033005
+min_lon = -122.0717714
+max_lon = -122.04819
 
 # Get the directory of the current script
 script_dir = os.path.dirname(os.path.abspath(__file__))

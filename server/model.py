@@ -1,6 +1,7 @@
 import tensorflow as tf
 from tensorflow.keras import layers, models, regularizers
 import os
+import re
 import numpy as np
 
 directory = "/images"
@@ -14,14 +15,19 @@ def load_images_coordinates(directory):
 
     for file in os.listdir(directory):
         imageFilePaths.append(os.path.join(directory, file))
-        coordinates = file.split('.')[0].split('_') 
-        longitude_str, latitude_str = coordinates[0].replace("$", "."), coordinates[1].replace("$", ".")
-        lat, lon = float(longitude_str), float(latitude_str)
+        match = re.match(r'([-+]?\d*\.\d+)_([-+]?\d*\.\d+)', file)
+        if not match:
+            print(f"Skipping file {file} due to unexpected format")
+            continue
+        try:
+            lat, lon = float(match.group(1)), float(match.group(2))
+        except ValueError:
+            print(f"Skipping file {file} due to invalid coordinate format")
+            continue
         imageCoordinates.append([lat, lon])
 
         min_lat, max_lat = min(min_lat, lat), max(max_lat, lat)
         min_lon, max_lon = min(min_lon, lon), max(max_lon, lon)
-    #print("{} + {} + {} + {}".format(min_lat, max_lat, min_lon, max_lon))
     return imageFilePaths, np.array(imageCoordinates), (min_lat, max_lat, min_lon, max_lon)
 
 train_paths, train_coordinates, (min_lat, max_lat, min_lon, max_lon) = load_images_coordinates("images/train")
@@ -76,13 +82,11 @@ model = models.Sequential([
     layers.Dense(2, activation='sigmoid')
 ])
 
-
 model.compile(
     optimizer=tf.keras.optimizers.Adam(learning_rate=0.0001),
     loss='mse',
     metrics=['mae']
 )
-
 
 epochs = 100 
 steps_per_epoch = len(train_paths) // batch_size
