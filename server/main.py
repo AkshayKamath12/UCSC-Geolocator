@@ -18,8 +18,7 @@ max_lon = -122.061568
 script_dir = os.path.dirname(os.path.abspath(__file__))
 model_path = os.path.join(script_dir, "geolocator.keras")
 
-# Print the model path to verify it
-print(f"Model path: {model_path}")
+model = keras.models.load_model(model_path)
 
 @app.route('/upload', methods=['POST'])
 def upload_image():
@@ -33,8 +32,6 @@ def upload_image():
         new_filename = generate_temp_upload_filename(filename, "." + extension)   
         print(new_filename)
         file.save(os.path.join('images/upload', new_filename))
-        model = keras.models.load_model(model_path)
-
         image = tf.keras.utils.load_img(new_filename, target_size=(224, 224))
         image_array = tf.keras.utils.img_to_array(image) / 255.0
         image_array = tf.expand_dims(image_array, axis=0)
