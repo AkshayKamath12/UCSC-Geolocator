@@ -25,14 +25,16 @@ print(f"Model path: {model_path}")
 @app.route('/upload', methods=['POST'])
 def upload_image():
     if 'image' not in request.files:
+        print("No file part in the request")
         return jsonify({'error': 'No file'}), 400
     
     file = request.files['image']
+    print(f"Received file: {file.filename}")
     
     if file and allowed(file.filename):
-        filename, extension = file.filename.split('.')
+        filename, extension = file.filename.rsplit('.', 1)
         new_filename = generate_temp_upload_filename(filename, "." + extension)   
-        print(new_filename)
+        print(f"New filename: {new_filename}")
         file.save(os.path.join('images/upload', new_filename))
         
         # Generate pseudo-random coordinates for testing
@@ -46,11 +48,12 @@ def upload_image():
         return jsonify({'prediction': predictions}), 200
         # TESTING
     else:
+        print("Invalid file")
         return jsonify({'error': 'Invalid file'}), 400
-    
+
 def allowed(file_name):
-    res = file_name.split('.')
-    return True if len(res) == 2 and res[1] in allowed_extensions else False
+    extension = file_name.rsplit('.', 1)[-1].lower()
+    return extension in allowed_extensions
 
 def generate_temp_upload_filename(filename, extension):
     tmp_file = tempfile.NamedTemporaryFile(delete=False, dir="images/upload", prefix=filename, suffix=extension)
