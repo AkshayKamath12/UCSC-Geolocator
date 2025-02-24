@@ -6,3 +6,6 @@
 **/server/images/fixFileName
 /server/images/replace.py
 **/server/images/upload
+**/__init__.py
+**/server/fix
+**/server/images
