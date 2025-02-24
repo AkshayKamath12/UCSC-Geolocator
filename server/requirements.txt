@@ -1,7 +1,5 @@
 flask
 flask-cors
 tensorflow
-pillow
-scipy
 python-dotenv
 redis
