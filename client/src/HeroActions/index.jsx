@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import styles from './HeroActions.module.css';
 
 function HeroActions({
@@ -11,9 +11,10 @@ function HeroActions({
   textContentTitleTitle,
   setCoordinates,
   setFile,
-  file // Add file prop
+  file
 }) {
   const [preview, setPreview] = useState(null);
+  const previewRef = useRef(null);
 
   const handleImageChange = async (e) => {
     const selectedFile = e.target.files[0];
@@ -22,6 +23,14 @@ function HeroActions({
       setPreview(URL.createObjectURL(selectedFile));
     }
   };
+
+  useEffect(() => {
+    if (preview && previewRef.current) {
+      const element = previewRef.current;
+      const offset = element.getBoundingClientRect().top + window.pageYOffset - (window.innerHeight / 2) + (element.clientHeight / 2);
+      window.scrollTo({ top: offset, behavior: 'smooth' });
+    }
+  }, [preview]);
 
   const handleImageSubmit = async () => {
     if (file) {
@@ -62,7 +71,7 @@ function HeroActions({
         </label>
       </div>
       {preview && (
-        <div className={styles.previewContainer}>
+        <div className={styles.previewContainer} ref={previewRef}>
           <img src={preview} alt="Preview" className={styles.previewImage} />
           <div className={`${styles.buttonGroup} ${buttonGroupAlign}`}>
             <button
