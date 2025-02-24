@@ -53,5 +53,15 @@ def denormalize_predicted_coordinates(coords, min_latitude, max_latitude, min_lo
     lon = coords[:, 1] * (max_longitude - min_longitude) + min_longitude
     return np.stack([lat, lon], axis=1)
 
+@app.route('/getNearbyLocationData', methods=['GET'])
+def getNearbyLocationData():
+    data = request.get_json()
+    if data['coordinates']:
+        [latitude, longitude] = data['coordinates']
+        nearest_coordinates = get_nearest_coordinates(latitude, longitude)
+        return jsonify({'res': nearest_coordinates})
+    else:
+        return jsonify({'res': []})
+    
 if __name__ == "__main__":
     app.run(debug=True, port=8080)

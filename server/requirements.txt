@@ -1,6 +1,7 @@
 flask
 flask-cors
-flaks-executor
 tensorflow
 pillow
 scipy
+python-dotenv
+redis
