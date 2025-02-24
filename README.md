@@ -30,4 +30,4 @@
 5) This should open a new tab in your browser.
 6) Add an image and click upload.
 
-**View the predicted coordinates in app and the nearby location data in the console**
+**View the predicted coordinates in the app and the nearby location data in the console**
