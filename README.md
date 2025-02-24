@@ -9,7 +9,7 @@
 5) Do ```sudo service redis-server start``` to initialize redis
 6) Go to the redisData folder
 7) Do ```redis-cli``` and copy the config information into a .env file in this folder. The env file should set HOST to localhost, DATABASE_PORT to the port shown from the command, and DATABASE_NUM to 0
-8) Create a file in this folder called \__init__.py so that Flask can recognize getNearby.py
+8) Create a file in this folder called \_\_init\_\_.py so that Flask can recognize getNearby.py
 
 ## Backend server:
 
