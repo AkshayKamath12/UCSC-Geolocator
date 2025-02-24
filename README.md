@@ -3,7 +3,7 @@
 
 ## Set up redis (must do this before starting Flask server):
 1) Open windows powershell and do ```wsl --install```
-2) For convenience do ```wsl --set-default Ubuntu``` so that you can type wsl to start up the linux environment and follow the instructions
+2) For convenience do ```wsl --set-default Ubuntu``` so that you can type wsl to start up the linux environment. Follow the instructions
 3) Open a code editor like VSCode and go to the server directory
 4) Run ```wsl``` and paste the commands at the following url to install Redis: [Redis community edition for windows](https://redis.io/docs/latest/operate/oss_and_stack/install/install-redis/install-redis-on-windows/)
 5) Do ```sudo service redis-server start``` to initialize redis
