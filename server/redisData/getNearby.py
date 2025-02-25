@@ -8,6 +8,9 @@ load_dotenv()
 
 r = redis.Redis(host=os.getenv('HOST'), port=int(os.getenv('DATABASE_PORT')), db=int(os.getenv('DATABASE_NUM')))
 
+#each JSON stores the coordinate and additional information about the building/landmark
+#we need to properly fill this out
+
 json_data = [
     {
         'coordinate': (36.9979, -122.0612),
@@ -38,6 +41,7 @@ def set_data():
         r.set(str(key), json.dumps(store_data))
     return arr
 
+#uses a minheap to store and return the "coordinates_requested" closest coordinates to the predicted coordinate
 def find_closest_coordinates(coordinate, coordinates, coordinates_requested=10):
     heap = []
 
@@ -52,12 +56,15 @@ def find_closest_coordinates(coordinate, coordinates, coordinates_requested=10):
 
     return res
 
+#simple helper function to get the distance between coordinates
 def calculate_distance(coordinate, coordinate2):
     return (coordinate[0] - coordinate2[0]) ** 2 + (coordinate[1] - coordinate2[1]) ** 2
 
+#gets the JSON data for a given building/landmark coordinate
 def get_data_from_redis(coordinate):
     return json.loads(r.get(str(coordinate)))
 
+#simple test to see if redis is properly configured
 if __name__ == "__main__":
     res = set_data()
     print(f'coordinates = {res}')

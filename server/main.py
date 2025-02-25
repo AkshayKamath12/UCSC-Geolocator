@@ -54,12 +54,18 @@ def generate_temp_upload_filename(filename, extension):
     tmp_file = tempfile.NamedTemporaryFile(delete=False, dir="images/upload", prefix=filename, suffix=extension)
     return tmp_file.name
 
+#prediction is normalized on a 0-1 scale for both latitude and longitude, so it needs to be converted back
 def denormalize_predicted_coordinates(coords, min_latitude, max_latitude, min_longitude, max_longitude):
     lat = coords[:, 0] * (max_latitude - min_latitude) + min_latitude
     lon = coords[:, 1] * (max_longitude - min_longitude) + min_longitude
     return np.stack([lat, lon], axis=1)
 
-#
+
+'''
+1) receives post request with coordinate array
+2) returns an array of arrays
+3) each array's first value is a closest coordinate and second value is a JSON description of that coordinate
+'''
 @app.route('/getNearbyLocationData', methods=['POST'])
 def getNearbyLocationData():
     start = time.time()
