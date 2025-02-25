@@ -1,9 +1,11 @@
-import ImageDisplay from './ImageDisplay';
-import MapDisplay from './mapDisplay';
-import { useState } from 'react';
+import React, { useState } from 'react';
+import BuildingBlocksContent from './BuildingBlocksContent/BuildingBlocksContent';
+import HeroActions from './HeroActions';
+import MapDisplay from './MapDisplay/MapDisplay';
 
 function App() {
-  const [coordinates, setCoordinates] = useState([]);  
+  const [coordinates, setCoordinates] = useState([]);
+  const [file, setFile] = useState(null); // Add state for file
 
   if(coordinates.length > 0){
     console.log("sending data")
@@ -33,8 +35,20 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <ImageDisplay setCoordinates={setCoordinates}/>
-        <MapDisplay coordinates={coordinates}/>
+        <BuildingBlocksContent />
+        <HeroActions
+          buttonGroupAlign="center"
+          buttonGroupButtonClassName="button1"
+          buttonGroupButtonClassNameOverride="button2"
+          buttonGroupText="Upload Here"
+          platform="desktop"
+          textContentTitleSubtitle="or click the button"
+          textContentTitleTitle="Drag an image here"
+          setCoordinates={setCoordinates}
+          setFile={setFile} // Pass setFile to HeroActions
+          file={file} // Pass file to HeroActions
+        />
+        <MapDisplay coordinates={coordinates} />
       </header>
     </div>
   );

@@ -22,7 +22,6 @@ COORDINATES = set_data()
 #upload an image and receive predicted coordinates
 @app.route('/upload', methods=['POST'])
 def upload_image():
-    
     if 'image' not in request.files:
         return jsonify({'error': 'No file'}), 400
     
@@ -30,7 +29,7 @@ def upload_image():
     
     if file and allowed(file.filename):
         filename, extension = file.filename.split('.')
-        new_filename = generate_temp_upload_filename(filename, "." + extension)  
+        new_filename = generate_temp_upload_filename(filename, "." + extension)   
         print(new_filename)
         file.save(os.path.join('images/upload', new_filename))
         model = tf.keras.models.load_model("geolocator.keras")
