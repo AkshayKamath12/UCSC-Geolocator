@@ -48,7 +48,7 @@ def upload_image():
     
 def allowed(file_name):
     res = file_name.split('.')
-    return True if len(res) == 2 and res[1] in ALLOWED_EXTENSIONS else False
+    return len(res) == 2 and res[1] in ALLOWED_EXTENSIONS
 
 def generate_temp_upload_filename(filename, extension):
     tmp_file = tempfile.NamedTemporaryFile(delete=False, dir="images/upload", prefix=filename, suffix=extension)
