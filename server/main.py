@@ -18,6 +18,7 @@ MAX_LAT = 37.000198
 MIN_LON = -122.064474
 MAX_LON = -122.061568
 COORDINATES = set_data()
+model = tf.keras.models.load_model("geolocator.keras")
 
 #upload an image and receive predicted coordinates
 @app.route('/upload', methods=['POST'])
@@ -32,8 +33,6 @@ def upload_image():
         new_filename = generate_temp_upload_filename(filename, "." + extension)   
         print(new_filename)
         file.save(os.path.join('images/upload', new_filename))
-        model = tf.keras.models.load_model("geolocator.keras")
-
         image = tf.keras.utils.load_img(new_filename, target_size=(224, 224))
         image_array = tf.keras.utils.img_to_array(image) / 255.0
         image_array = tf.expand_dims(image_array, axis=0)
