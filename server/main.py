@@ -4,6 +4,7 @@ import os
 import tempfile
 import tensorflow as tf
 import numpy as np
+import time
 from redisData.getNearby import set_data, find_closest_coordinates, get_data_from_redis
 
 #set up app and cors to allow requests from node server in front end
@@ -23,6 +24,7 @@ model = tf.keras.models.load_model("geolocator.keras")
 #upload an image and receive predicted coordinates
 @app.route('/upload', methods=['POST'])
 def upload_image():
+    start = time.time()
     if 'image' not in request.files:
         return jsonify({'error': 'No file'}), 400
     
@@ -31,7 +33,6 @@ def upload_image():
     if file and allowed(file.filename):
         filename, extension = file.filename.split('.')
         new_filename = generate_temp_upload_filename(filename, "." + extension)   
-        print(new_filename)
         file.save(os.path.join('images/upload', new_filename))
         image = tf.keras.utils.load_img(new_filename, target_size=(224, 224))
         image_array = tf.keras.utils.img_to_array(image) / 255.0
@@ -39,7 +40,8 @@ def upload_image():
         predictions = model.predict(image_array)
         predictions = denormalize_predicted_coordinates(predictions, MIN_LAT, MAX_LAT, MIN_LON, MAX_LON)[0]
         os.remove(new_filename)
-        print(predictions)
+        end = time.time()
+        print(f'Time for /upload endpoint = {end - start}')
         return jsonify({'prediction': predictions.tolist()}), 200
     else:
         return jsonify({'error': 'Invalid file'}), 400
@@ -60,13 +62,15 @@ def denormalize_predicted_coordinates(coords, min_latitude, max_latitude, min_lo
 #
 @app.route('/getNearbyLocationData', methods=['POST'])
 def getNearbyLocationData():
+    start = time.time()
     data = request.get_json()
     if data:
         coordinate = tuple(data)
         #note: change coordinates requested below to be a constant at top of file
         nearest_coordinates = find_closest_coordinates(coordinate, COORDINATES, coordinates_requested=2)
         res = [[elem[1], get_data_from_redis(elem[1])] for elem in nearest_coordinates]
-        print(res)
+        end = time.time()
+        print(f'Time for /getNearbyLocationData endpoint = {end - start}')
         return jsonify({'res': res})
     else:
         return jsonify({'res': []})
