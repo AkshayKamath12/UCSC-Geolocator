@@ -14,3 +14,4 @@ tools/output/*.jpg
 **/__init__.py
 **/server/fix
 **/server/images
+**/tools
