@@ -64,7 +64,7 @@ def calculate_distance(coordinate, coordinate2):
 def get_data_from_redis(coordinate):
     return json.loads(r.get(str(coordinate)))
 
-#simple test to see if redis is properly configured
+#simple test to see if redis is properly configured and methods are working for you
 if __name__ == "__main__":
     res = set_data()
     print(f'coordinates = {res}')
