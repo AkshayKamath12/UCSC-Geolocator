@@ -100,13 +100,28 @@ epochs = 100
 steps_per_epoch = len(train_paths) // batch_size
 validation_steps = len(test_paths) // batch_size
 
+# Custom callback to save the model every 5 epochs
+class SaveModelEveryNEpochs(tf.keras.callbacks.Callback):
+    def __init__(self, save_freq):
+        super(SaveModelEveryNEpochs, self).__init__()
+        self.save_freq = save_freq
+
+    def on_epoch_end(self, epoch, logs=None):
+        if (epoch + 1) % self.save_freq == 0:
+            model_path = f"geolocator_epoch_{epoch + 1}.keras"
+            self.model.save(model_path)
+            print(f"Model saved to {model_path}")
+
+save_model_callback = SaveModelEveryNEpochs(save_freq=5)
+
 history = model.fit(
     train_generator,
     validation_data=val_generator,
     steps_per_epoch=steps_per_epoch,
     validation_steps=validation_steps,
     epochs=epochs,
-    verbose=1
+    verbose=1,
+    callbacks=[save_model_callback]
 )
 
-model.save("geolocator.keras")
+model.save("geolocator_final.keras")

@@ -6,6 +6,7 @@ import tensorflow as tf
 from tensorflow import keras
 import numpy as np
 import random
+import glob
 
 app = Flask(__name__)
 CORS(app)
@@ -17,10 +18,21 @@ max_lon = -122.04819
 
 # Get the directory of the current script
 script_dir = os.path.dirname(os.path.abspath(__file__))
-model_path = os.path.join(script_dir, "geolocator.keras")
+
+def get_latest_model_path(directory):
+    model_files = glob.glob(os.path.join(directory, "*.keras"))
+    if not model_files:
+        raise FileNotFoundError("No .keras model files found in the directory.")
+    latest_model = max(model_files, key=os.path.getctime)
+    return latest_model
+
+model_path = get_latest_model_path(script_dir)
 
 # Print the model path to verify it
 print(f"Model path: {model_path}")
+
+# Load the model
+model = keras.models.load_model(model_path)
 
 @app.route('/upload', methods=['POST'])
 def upload_image():
