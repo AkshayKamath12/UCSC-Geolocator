@@ -2,11 +2,16 @@
   "name": "client",
   "version": "0.1.0",
   "private": true,
+  "proxy": "http://localhost:8080",
   "dependencies": {
     "cra-template": "1.2.0",
+    "css-loader": "^7.1.2",
+    "leaflet": "^1.9.4",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
-    "react-scripts": "^5.0.1"
+    "react-leaflet": "^5.0.0",
+    "react-scripts": "^5.0.1",
+    "style-loader": "^4.0.0"
   },
   "scripts": {
     "start": "react-scripts start",
