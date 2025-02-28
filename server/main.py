@@ -9,7 +9,7 @@ import random
 
 app = Flask(__name__)
 CORS(app)
-allowed_extensions = {"png", "jpg"}
+allowed_extensions = {"jpg"}
 min_lat = 36.97721
 max_lat = 37.0033005
 min_lon = -122.0717714
@@ -25,30 +25,26 @@ print(f"Model path: {model_path}")
 @app.route('/upload', methods=['POST'])
 def upload_image():
     if 'image' not in request.files:
-        print("No file part in the request")
         return jsonify({'error': 'No file'}), 400
     
     file = request.files['image']
-    print(f"Received file: {file.filename}")
     
     if file and allowed(file.filename):
         filename, extension = file.filename.rsplit('.', 1)
-        new_filename = generate_temp_upload_filename(filename, "." + extension)   
-        print(f"New filename: {new_filename}")
+        new_filename = generate_temp_upload_filename(filename, "." + extension)  
+        print(new_filename)
         file.save(os.path.join('images/upload', new_filename))
-        
-        # Generate pseudo-random coordinates for testing
-        # TESTING
-        lat = random.uniform(min_lat, max_lat)
-        lon = random.uniform(min_lon, max_lon)
-        predictions = [lat, lon]
-        
+        model = keras.models.load_model("geolocator.keras")
+
+        image = tf.keras.utils.load_img(new_filename, target_size=(224, 224))
+        image_array = tf.keras.utils.img_to_array(image) / 255.0
+        image_array = tf.expand_dims(image_array, axis=0)
+        predictions = model.predict(image_array)
+        predictions = denormalize_predicted_coordinates(predictions, min_lat, max_lat, min_lon, max_lon)[0]
         os.remove(new_filename)
         print(predictions)
-        return jsonify({'prediction': predictions}), 200
-        # TESTING
+        return jsonify({'prediction': predictions.tolist()}), 200
     else:
-        print("Invalid file")
         return jsonify({'error': 'Invalid file'}), 400
 
 def allowed(file_name):
