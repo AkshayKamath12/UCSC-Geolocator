@@ -8,10 +8,7 @@ tools/output/*.jpg
 **/server/images/fixFileName
 /server/images/replace.py
 **/server/images/upload
-**/__init__.py
-**/server/fix
-**/server/images
-**/__init__.py
-**/server/fix
-**/server/images
-**/tools
+**/server/images/output
+**/server/images/test
+**/server/images/testModel
+**/server/images/train

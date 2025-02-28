@@ -1,6 +1,7 @@
 flask
 flask-cors
+flask-executor
 tensorflow
+pillow
 python-dotenv
 redis
-scikit-learn
