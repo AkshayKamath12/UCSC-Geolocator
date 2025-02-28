@@ -5,3 +5,4 @@ tensorflow
 pillow
 python-dotenv
 redis
+geopy
