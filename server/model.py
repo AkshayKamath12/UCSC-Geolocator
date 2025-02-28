@@ -2,8 +2,10 @@ import tensorflow as tf
 from tensorflow.keras import layers, models, regularizers
 import os
 import numpy as np
+from sklearn.model_selection import train_test_split
 
-directory = "/images"
+directory = "/images" #directory to read training/test data from
+test_size = 0.1 # % of read data reserved for validation
 
 def load_images_coordinates(directory):
     imageFilePaths = []
@@ -24,8 +26,12 @@ def load_images_coordinates(directory):
     #print("{} + {} + {} + {}".format(min_lat, max_lat, min_lon, max_lon))
     return imageFilePaths, np.array(imageCoordinates), (min_lat, max_lat, min_lon, max_lon)
 
-train_paths, train_coordinates, (min_lat, max_lat, min_lon, max_lon) = load_images_coordinates("images/train")
-test_paths, test_coordinates, _ = load_images_coordinates("images/test")
+# train_paths, train_coordinates, (min_lat, max_lat, min_lon, max_lon) = load_images_coordinates("images/train")
+# test_paths, test_coordinates, _ = load_images_coordinates("images/test")
+
+paths, coordinates, (min_lat, max_lat, min_lon, max_lon) = load_images_coordinates(directory)
+train_paths, train_coordinates, test_paths, test_coordinates = train_test_split(paths, coordinates, test_size=test_size, random_state=42)
+
 
 def normalize_coordinates(coords):
     lat = (coords[:, 0] - min_lat) / (max_lat - min_lat)
