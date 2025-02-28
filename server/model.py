@@ -5,7 +5,7 @@ import re
 import numpy as np
 from sklearn.model_selection import train_test_split
 
-directory = "/images" #directory to read training/test data from
+directory = "images/images" #directory to read training/test data from
 test_size = 0.1 # % of read data reserved for validation
 
 def load_images_coordinates(directory):
@@ -36,7 +36,7 @@ def load_images_coordinates(directory):
 # test_paths, test_coordinates, _ = load_images_coordinates("images/test")
 
 paths, coordinates, (min_lat, max_lat, min_lon, max_lon) = load_images_coordinates(directory)
-train_paths, train_coordinates, test_paths, test_coordinates = train_test_split(paths, coordinates, test_size=test_size, random_state=42)
+train_paths, test_paths, train_coordinates, test_coordinates = train_test_split(paths, coordinates, test_size=test_size, random_state=42)
 
 
 def normalize_coordinates(coords):
