@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import BuildingBlocksContent from './BuildingBlocksContent/BuildingBlocksContent';
 import HeroActions from './HeroActions';
 import MapDisplay from './MapDisplay/MapDisplay';
@@ -6,6 +6,14 @@ import MapDisplay from './MapDisplay/MapDisplay';
 function App() {
   const [coordinates, setCoordinates] = useState([]);
   const [file, setFile] = useState(null); // Add state for file
+
+  useEffect(() => {
+    console.log('Coordinates updated:', coordinates);
+  }, [coordinates]);
+
+  useEffect(() => {
+    console.log('File updated:', file);
+  }, [file]);
 
   return (
     <div className="App">
