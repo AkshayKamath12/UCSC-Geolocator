@@ -1,15 +1,17 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import BuildingBlocksContent from './BuildingBlocksContent/BuildingBlocksContent';
 import HeroActions from './HeroActions';
 import MapDisplay from './MapDisplay/MapDisplay';
+import LandmarkDisplay from './LandmarkDisplay/LandmarkDisplay'
 
 function App() {
   const [coordinates, setCoordinates] = useState([]);
   const [file, setFile] = useState(null); // Add state for file
+  const [landmarks, setLandmarks] = useState([]) // stores info about landmarks
+  const [center, setCenter] = useState([]) // coord of center of map
 
-  if(coordinates.length > 0){
-    console.log("sending data")
-    const getData = async () => {
+  useEffect(() => {
+    const getLandmarkData = async () => {
       try {
         await fetch('/getNearbyLocationData', {
           method: 'POST',
@@ -18,19 +20,23 @@ function App() {
           },
           body: JSON.stringify(coordinates)
         }).then(
-          res =>res.json()
+          res => res.json()
         ).then(
-          data =>{
-            console.log(data["res"])
+          data => {
+            setLandmarks(data.res)
           }
         )
       } catch (error) {
-        console.error('Error sending coordinates:', error);
+        console.error('Error getting landmark data:', error);
       }
     };
-
-    getData()
-  }
+    if(coordinates.length > 0){  
+      getLandmarkData()
+      setCenter(coordinates)
+    }
+    
+  }, [coordinates]);
+  
 
   return (
     <div className="App">
@@ -48,10 +54,10 @@ function App() {
           setFile={setFile} // Pass setFile to HeroActions
           file={file} // Pass file to HeroActions
         />
-        <MapDisplay coordinates={coordinates} />
+        <MapDisplay coordinates={coordinates} landmarks={landmarks} center = {center}/>
+        <LandmarkDisplay landmarks={landmarks} setCenter={setCenter}/>
       </header>
     </div>
   );
 }
-
 export default App;
