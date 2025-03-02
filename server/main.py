@@ -76,7 +76,6 @@ def getNearbyLocationData():
     data = request.get_json()
     if data:
         coordinate = tuple(data)
-        print(coordinate)
         #note: change coordinates requested below to be a constant at top of file
         nearest_coordinates = find_closest_coordinates(coordinate, COORDINATES, coordinates_requested=2)
         res = [[elem[1], get_data_from_redis(elem[1])] for elem in nearest_coordinates]
