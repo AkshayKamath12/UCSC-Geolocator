@@ -6,7 +6,7 @@ import numpy as np
 from sklearn.model_selection import train_test_split
 
 directory = "images/images" #directory to read training/test data from
-test_size = 0.1 # % of read data reserved for validation
+test_size = 0.2 # % of read data reserved for validation
 
 def load_images_coordinates(directory):
     imageFilePaths = []
@@ -94,7 +94,7 @@ model.compile(
     metrics=['mae']
 )
 
-epochs = 100 
+epochs = 50
 steps_per_epoch = len(train_paths) // batch_size
 validation_steps = len(test_paths) // batch_size
 
