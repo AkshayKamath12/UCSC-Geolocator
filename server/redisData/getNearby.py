@@ -3,6 +3,7 @@ from dotenv import load_dotenv
 import json
 import os
 import heapq
+from redisData.data import json_data
 
 load_dotenv()
 
@@ -11,22 +12,7 @@ r = redis.Redis(host=os.getenv('HOST'), port=int(os.getenv('DATABASE_PORT')), db
 #each JSON stores the coordinate and additional information about the building/landmark
 #we need to properly fill this out
 
-json_data = [
-    {
-        'coordinate': (36.9979, -122.0612),
-        'description': "test descr 1"
-    },
 
-    {
-        'coordinate': (36.9996, -121.9731),
-        'description': "test descr 2"
-    },
-
-    {
-        'coordinate': (37.0010, -122.0305),
-        'description': "test descr 3"
-    },
-]
 
 #parses JSON data above, stores data in Redis, and returns an array of all the coordinates as tuples
 def set_data():
@@ -34,9 +20,9 @@ def set_data():
     for json_location in json_data:
         key = json_location['coordinate']
         arr.append(key)
-        val_description = json_location['description']
+        val_name = json_location['name']
         store_data = {
-            "description": val_description
+            "name": val_name
         }
         r.set(str(key), json.dumps(store_data))
     return arr
