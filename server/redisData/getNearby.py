@@ -3,7 +3,7 @@ from dotenv import load_dotenv
 import json
 import os
 import heapq
-from data import json_data
+from redisData.data import json_data
 
 load_dotenv()
 
@@ -20,9 +20,9 @@ def set_data():
     for json_location in json_data:
         key = json_location['coordinate']
         arr.append(key)
-        val_description = json_location['description']
+        val_name = json_location['name']
         store_data = {
-            "description": val_description
+            "name": val_name
         }
         r.set(str(key), json.dumps(store_data))
     return arr

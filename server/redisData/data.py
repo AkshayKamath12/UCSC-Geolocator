@@ -7,7 +7,7 @@ json_data = [
 
     {
         'coordinate': (37.00100, -122.05773),
-        'College 9/10 Dining Hall'
+        'name': 'College 9/10 Dining Hall',
         'description': "dining hall with a cafe/restaurant upstairs"
     },
 
@@ -134,12 +134,6 @@ json_data = [
     {
         'coordinate': (36.99520, -122.06163),
         'name': "Media Theater",
-        'description': ""
-    },
-
-    {
-        'coordinate': (36.99485),
-        'name': "Theater Arts Center",
         'description': ""
     },
 
