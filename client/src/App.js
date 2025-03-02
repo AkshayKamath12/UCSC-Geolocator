@@ -1,13 +1,7 @@
-import React, { useState } from 'react';
-import BuildingBlocksContent from './BuildingBlocksContent/BuildingBlocksContent';
-import HeroActions from './HeroActions';
-import MapDisplay from './MapDisplay';
-import ImageDisplay from './ImageDisplay/ImageDisplay';
+import logo from './logo.svg';
+import './App.css';
 
 function App() {
-  const [coordinates, setCoordinates] = useState([]);
-  const [file, setFile] = useState(null); // Add state for file
-
   return (
     <div className="App">
       <header className="App-header">
