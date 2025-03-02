@@ -7,7 +7,7 @@ json_data = [
 
     {
         'coordinate': (37.00100, -122.05773),
-        'College 9/10 Dining Hall'
+        'name': 'College 9/10 Dining Hall',
         'description': "dining hall with a cafe/restaurant upstairs"
     },
 
@@ -97,7 +97,7 @@ json_data = [
 
     {
         'coordinate': (36.99856, -122.06045),
-        'name': "Natural Sciences 2",
+        'name': "Natural Science Building  2",
         'description': ""
     },
 
@@ -138,12 +138,6 @@ json_data = [
     },
 
     {
-        'coordinate': (36.99485),
-        'name': "Theater Arts Center",
-        'description': ""
-    },
-
-    {
         'coordinate': (36.99449, -122.06093),
         'name': "Eduardo Carrillo Gallery at UCSC",
         'description': ""
@@ -177,7 +171,7 @@ json_data = [
     {
         'coordinate': (37.00102, -122.06291),
         'name': "Engineering Building 2",
-        'description': ""
+        'description': "Academic department ,offices of professor,and labs"
     },
 
     {
@@ -484,5 +478,135 @@ json_data = [
         'coordinate': (36.98235, -122.05989),
         'name': "UCSC Aboretum and Botanic Garden",
         'description': ""
-    }
+    },
+
+    {
+        'coordinate': (36.99887982079151, -122.0662458744743 ),
+        'name': "Kresge Academic Building/Lecture Hall",
+        'description': "Academic Building with a lecture hall,computer lab,and classrooms. "
+    },
+
+    {
+        'coordinate': (36.99789, -122.06672 ),
+        'name': "Owl's Nest",
+        'description': "Kresge's Cafe"
+    },
+
+    {
+        'coordinate': (36.99417, -122.06517 ),
+        'name': "D-Building",
+        'description': "Mary Porter Sesnon Art Gallery, Porter koi pond, advising office, and a student office activies classroom"
+    },
+
+        {
+        'coordinate': (36.99370, -122.06574 ),
+        'name': "CAPS Porter Annex",
+        'description': "Mental health service. "
+    },
+
+    {
+        'coordinate': ( 36.99983, -122.06112),
+        'name': "Biomed building",
+        'description': "Laboratory/Learning center"
+    },
+
+    {
+        'coordinate': ( 36.99889, -122.06165),
+        'name': "Department of Molecular, Cell and Developmental Biology",
+        'description': "Laboratory/Academic building "
+    },
+
+    {
+        'coordinate': ( 36.99961, -122.06458 ),
+        'name': "Graduate Housing",
+        'description': "Student housing for gradute students "
+    },
+
+
+   {
+        'coordinate': (36.99156, -122.064410 ),
+        'name': "Redwood Free Market",
+        'description': "Free food provided for and a coffee shop "
+    },
+    
+   {
+        'coordinate': (36.99649 , -122.06567),
+        'name': "Porter/Kresge/Redwood Grove Housing Office",
+        'description': "Housing authority office "
+    },
+	 {
+        'coordinate': (36.99670, -122.06602),
+        'name': "Porter/Kresge Business Office ",
+        'description': "Office Building"
+    },
+
+
+    {
+        'coordinate': (36.99769, -122.06716),
+        'name': "Kresge Mailroom",
+        'description': "Postal Office for Kresge residents"
+    },
+
+
+    {
+        'coordinate': (36.99475, -122.06243),
+        'name': "UCSC Theater Arts Center Mainstage",
+        'description': "Peforming arts theater."
+    },
+
+    {
+        'coordinate': (36.99609, -122.05687754156293),
+        'name': "UCSC Career Center",
+        'description': "Financial aid and career services."
+    },
+
+    {
+        'coordinate': (36.99794 , -122.05674 ),
+        'name': "Classroom Unit Building",
+        'description': "Building contains classroom and the UCSC Division of Global Engagement "
+    },
+
+    {
+        'coordinate': (36.99772, -122.05566 ),
+        'name': "Slug Stop",
+        'description': "Convenience store"
+    },
+
+    {
+        'coordinate': (36.99791 , -122.05562 ),
+        'name': "Bay Tree Campus Store",
+        'description': "Store that sells slug merch and materials for students."
+    },
+
+
+    {
+        'coordinate': (36.99774, -122.05550 ),
+        'name': "Bay Tree Campus Buidling ",
+        'description': "At 2nd floor the STARRS for Services for Transfer Re-Entry and Resilient Scholars.At the 4th floor the UCSC Disability Resource Center (DRC)."
+    },
+
+    {
+        'coordinate': (36.99811 , -122.05587),
+        'name': "Ivéta Cafe",
+        'description': "Cafe. 2nd floor the graduate student commons."
+    },
+
+    {
+        'coordinate': (36.99785, -122.05591),
+        'name': "UCSC Student Union",
+        'description': "This building contains the SOAR (Student Organization Advising and Resources) Office and the student union."
+    },
+
+     {
+        'coordinate': (36.99871, -122.05629),
+        'name': "Quarry Amphitheater",
+        'description': "Amphitheater."
+    },
+
+     {
+        'coordinate': (37.00001, -122.05326),
+        'name': "Merrill Market",
+        'description': "Convenience store."
+    },
+
 ]
