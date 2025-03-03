@@ -20,8 +20,17 @@ function HeroActions({
     if (selectedFile) {
       setFile(selectedFile);
       setPreview(URL.createObjectURL(selectedFile));
+      appears("submit")
     }
   };
+
+  async function appears(elementID, timeout=500) {
+    await new Promise(resolve => setTimeout(resolve, timeout));
+      const element = document.getElementById(elementID);
+      if (element) {
+        element.scrollIntoView({behavior: "smooth", block: "end"})
+      } 
+  }
 
   const handleImageSubmit = async () => {
     if (file) {
@@ -37,6 +46,7 @@ function HeroActions({
         if (data.prediction) {
           console.log(data.prediction);
           setCoordinates(data.prediction);
+          appears("map", 250);
         }
       } catch (err) {
         console.log(err);
@@ -62,12 +72,13 @@ function HeroActions({
         </label>
       </div>
       {preview && (
-        <div className={styles.previewContainer}>
+        <div className={styles.previewContainer} id="submit">
           <img src={preview} alt="Preview" className={styles.previewImage} />
           <div className={`${styles.buttonGroup} ${buttonGroupAlign}`}>
             <button
               className={`${styles.button} ${buttonGroupButtonClassName} ${buttonGroupButtonClassNameOverride}`}
               onClick={handleImageSubmit}
+              
             >
               Submit Image
             </button>

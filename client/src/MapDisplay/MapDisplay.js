@@ -24,7 +24,7 @@ function MapDisplay({ coordinates, landmarks, center }) {
 
   if (coordinates.length > 0 && center.length > 0) {
     return (
-      <div className={styles.mapDisplay}>
+      <div className={styles.mapDisplay} id = "map">
         <h2>Map Preview:</h2>
         <div>coordinates: {coordinates[0]}, {coordinates[1]}</div>
         <MapContainer
