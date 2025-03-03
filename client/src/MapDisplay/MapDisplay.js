@@ -22,7 +22,7 @@ function MapDisplay({ coordinates, landmarks, center }) {
         <MapContainer
           key={center}
           center={center}
-          zoom={25}
+          zoom={17}
           className={styles.mapContainer}
         >
           <TileLayer
