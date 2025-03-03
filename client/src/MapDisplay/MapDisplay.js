@@ -1,26 +1,18 @@
 import React from 'react';
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
-import { Icon } from "leaflet";
 import "leaflet/dist/leaflet.css";
-import markerIconPng from "leaflet/dist/images/marker-icon.png";
 import styles from './MapDisplay.module.css';
+import { blueIcon } from './leaflet-color-markers-master/js/leaflet-color-markers';
+
+import { goldIcon } from './leaflet-color-markers-master/js/leaflet-color-markers';
+import { greenIcon } from './leaflet-color-markers-master/js/leaflet-color-markers';
+import { greyIcon } from './leaflet-color-markers-master/js/leaflet-color-markers';
+import { orangeIcon } from './leaflet-color-markers-master/js/leaflet-color-markers';
+import { redIcon } from './leaflet-color-markers-master/js/leaflet-color-markers';
 
 // uses leaflet to display coordinates on a map
 function MapDisplay({ coordinates, landmarks, center }) {
-  
-  // predicted coord marker icon parameters
-  const location_icon = new Icon({
-    iconUrl: markerIconPng,
-    iconSize: [17, 30],
-    iconAnchor: [9, 30]
-  });
-
-  // landmark marker icon parameters
-  const landmark_icon = new Icon({
-    iconUrl: markerIconPng,
-    iconSize: [12, 20],
-    iconAnchor: [7, 20]
-  });
+  const LANDMARK_ICONS = [goldIcon, greenIcon, greyIcon, orangeIcon, redIcon]
 
   if (coordinates.length > 0 && center.length > 0) {
     return (
@@ -37,11 +29,11 @@ function MapDisplay({ coordinates, landmarks, center }) {
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
             attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
           />
-          <Marker position={coordinates} icon={location_icon}>
+          <Marker position={coordinates} icon={blueIcon}>
             <Popup>coordinates: {coordinates[0]}, {coordinates[1]}</Popup>
           </Marker>
-          {Object.entries(landmarks).map(([id, marker]) => (
-            <Marker key={id} position={marker[0]} icon={landmark_icon}>
+          {Object.entries(landmarks).map(([id, marker], index) => (
+            <Marker key={id} position={marker[0]} icon={LANDMARK_ICONS[index]}>
               <Popup>{marker[1].name}</Popup>
             </Marker>
           ))}

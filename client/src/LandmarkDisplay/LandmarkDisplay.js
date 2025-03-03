@@ -4,6 +4,7 @@ import React from 'react';
 function LandmarkDisplay({ landmarks, setCenter }) {
   const tableDataClass = "p-2 border border-black";
   const tableHeadClass = "bg-blue-100 border border-black text-center p-2";
+  const tailwindColorClasses = ["bg-yellow-400 hover:bg-yellow-300", "bg-green-600 hover:bg-green-400", "bg-gray-400 hover:bg-gray-300", "bg-yellow-700 hover:bg-yellow-400", "bg-red-600 hover:bg-red-400"]
   if (landmarks.length > 0) {
     console.log(landmarks[0][1]);
     return (
@@ -20,14 +21,14 @@ function LandmarkDisplay({ landmarks, setCenter }) {
             </tr>
           </thead>
           <tbody>
-            {Object.entries(landmarks).map(([id, marker]) => (
+            {Object.entries(landmarks).map(([id, marker], index) => (
               <tr key={id}>
                 <td key='coordinates' className={tableDataClass}>{marker[0][0]}, {marker[0][1]}</td>
                 {Object.entries(marker[1]).map(([id, col_name]) => (
                   <td key={id} className={tableDataClass}>{col_name}</td>
                 ))}
                 <td key='setCenter' className={tableDataClass}>
-                  <button onClick={()=>setCenter(marker[0])} className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded'>
+                  <button onClick={()=>setCenter(marker[0])} className={'text-white font-bold py-2 px-4 rounded' + ' ' + tailwindColorClasses[index]}>
                     Find Landmark
                   </button>
                 </td> 
