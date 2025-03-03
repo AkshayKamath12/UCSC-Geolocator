@@ -41,7 +41,7 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <BuildingBlocksContent />
+        <BuildingBlocksContent/>
         <HeroActions
           buttonGroupAlign="center"
           buttonGroupButtonClassName="button1"
@@ -54,8 +54,14 @@ function App() {
           setFile={setFile} // Pass setFile to HeroActions
           file={file} // Pass file to HeroActions
         />
-        <MapDisplay coordinates={coordinates} landmarks={landmarks} center = {center}/>
-        <LandmarkDisplay landmarks={landmarks} setCenter={setCenter}/>
+        <div className='flex flex-col md:flex-row'>
+          <MapDisplay coordinates={coordinates} landmarks={landmarks} center = {center}/>
+          <div>
+            <LandmarkDisplay landmarks={landmarks} setCenter={setCenter}/>  
+          </div>
+          
+        </div>
+        
       </header>
     </div>
   );

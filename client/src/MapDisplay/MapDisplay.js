@@ -25,12 +25,12 @@ function MapDisplay({ coordinates, landmarks, center }) {
   if (coordinates.length > 0 && center.length > 0) {
     return (
       <div className={styles.mapDisplay} id = "map">
-        <h2>Map Preview:</h2>
+        <h2 className='text-4xl font-bold'>Map Preview:</h2>
         <div>coordinates: {coordinates[0]}, {coordinates[1]}</div>
         <MapContainer
           key={center}
           center={center}
-          zoom={17}
+          zoom={25}
           className={styles.mapContainer}
         >
           <TileLayer

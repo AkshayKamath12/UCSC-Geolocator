@@ -24,11 +24,18 @@ function HeroActions({
     }
   };
 
-  async function appears(elementID, timeout=500) {
+  // scrolls to the element in the DOM with a specific id when it appears
+  // adjust timeout for the duration it will take for the element to appear, or 0 if it is already set
+  async function appears(elementID, timeout=500, scrollToEnd = true) {
     await new Promise(resolve => setTimeout(resolve, timeout));
       const element = document.getElementById(elementID);
       if (element) {
-        element.scrollIntoView({behavior: "smooth", block: "end"})
+        if (scrollToEnd){
+          element.scrollIntoView({behavior: "smooth", block: "end"})
+        } else {
+          element.scrollIntoView({behavior: "smooth"})
+        }
+        
       } 
   }
 
@@ -46,7 +53,7 @@ function HeroActions({
         if (data.prediction) {
           console.log(data.prediction);
           setCoordinates(data.prediction);
-          appears("map", 250);
+          appears("map", 250, false);
         }
       } catch (err) {
         console.log(err);
