@@ -10,7 +10,7 @@ import random
 from redisData.getNearby import set_data, find_closest_coordinates, get_data_from_redis
 
 app = Flask(__name__)
-CORS(app)
+CORS(app, resources={r"/upload": {"origins": "*"}})
 allowed_extensions = {"png", "jpg"}
 MIN_LAT = 36.97721
 MAX_LAT = 37.0033005
@@ -26,6 +26,7 @@ model = keras.models.load_model(model_path)
 
 @app.route('/upload', methods=['POST'])
 def upload_image():
+    print(request)
     start = time.time()
     if 'image' not in request.files:
         print("No file part in the request")
