@@ -14,55 +14,61 @@ function HeroActions({
   file // Add file prop
 }) {
   const [preview, setPreview] = useState(null);
+  const [isDragOver, setIsDragOver] = useState(false);
 
   const handleImageChange = async (e) => {
     const selectedFile = e.target.files[0];
     if (selectedFile) {
       setFile(selectedFile);
       setPreview(URL.createObjectURL(selectedFile));
-      appears("submit")
     }
   };
 
-  // scrolls to the element in the DOM with a specific id when it appears
-  // adjust timeout for the duration it will take for the element to appear, or 0 if it is already set
-  async function appears(elementID, timeout=500, scrollToEnd = true) {
-    await new Promise(resolve => setTimeout(resolve, timeout));
-      const element = document.getElementById(elementID);
-      if (element) {
-        if (scrollToEnd){
-          element.scrollIntoView({behavior: "smooth", block: "end"})
-        } else {
-          element.scrollIntoView({behavior: "smooth"})
-        }
-        
-      } 
-  }
+  const handleDragOver = (e) => {
+    e.preventDefault();
+    setIsDragOver(true);
+  };
+
+  const handleDragLeave = () => {
+    setIsDragOver(false);
+  };
+
+  const handleDrop = (e) => {
+    e.preventDefault();
+    setIsDragOver(false);
+    const selectedFile = e.dataTransfer.files[0];
+    if (selectedFile) {
+      setFile(selectedFile);
+      setPreview(URL.createObjectURL(selectedFile));
+    }
+  };
 
   const handleImageSubmit = async () => {
-    if (file) {
-      const imageData = new FormData();
-      imageData.append('image', file);
+    const imageData = new FormData();
+    imageData.append('image', file);
 
-      try {
-        const response = await fetch("/upload", {
-          method: 'POST',
-          body: imageData
-        });
-        const data = await response.json();
-        if (data.prediction) {
-          console.log(data.prediction);
-          setCoordinates(data.prediction);
-          appears("map", 250, false);
-        }
-      } catch (err) {
-        console.log(err);
+    try {
+      const response = await fetch("/upload", {
+        method: 'POST',
+        body: imageData
+      });
+      const data = await response.json();
+      if (data.prediction) {
+        console.log(data.prediction);
+        setCoordinates(data.prediction);
       }
+    } catch (err) {
+      console.log(err);
     }
   };
 
   return (
-    <div className={styles.heroActions}>
+    <div
+      className={`${styles.heroActions} ${isDragOver ? styles.dragover : ''}`}
+      onDragOver={handleDragOver}
+      onDragLeave={handleDragLeave}
+      onDrop={handleDrop}
+    >
       <div className={styles.textContentTitle}>
         <h1 className={styles.title}>{textContentTitleTitle}</h1>
         <p className={styles.subtitle}>{textContentTitleSubtitle}</p>
@@ -85,7 +91,6 @@ function HeroActions({
             <button
               className={`${styles.button} ${buttonGroupButtonClassName} ${buttonGroupButtonClassNameOverride}`}
               onClick={handleImageSubmit}
-              
             >
               Submit Image
             </button>

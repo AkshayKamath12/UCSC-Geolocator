@@ -13,6 +13,12 @@
   font-size: 72px;
   color: #1e1e1e;
   font-family: 'Inter', sans-serif;
+  border: 2px dashed #ccc; /* Add dashed border for drag-and-drop area */
+}
+
+.heroActions.dragover {
+  border-color: #000; /* Change border color when dragging over */
+  background-color: rgba(0, 0, 0, 0.1); /* Add a semi-transparent black tint */
 }
 
 .textContentTitle {
@@ -102,9 +108,9 @@
 }
 
 .previewImage {
-  width: 30vw; /* 40% of the viewport width */
+  width: 30vw; /* 30% of the viewport width */
   height: auto; /* Maintain aspect ratio */
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  margin-bottom: 20px; /* Add margin-bottom to space the image and button */
+  margin-bottom: 35px; /* Add margin-bottom to space the image and button */
 }

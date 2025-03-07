@@ -1,22 +1,24 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import styles from './MapDisplay.module.css';
 import { blueIcon } from './leaflet-color-markers-master/js/leaflet-color-markers';
-
-import { goldIcon } from './leaflet-color-markers-master/js/leaflet-color-markers';
-import { greenIcon } from './leaflet-color-markers-master/js/leaflet-color-markers';
-import { greyIcon } from './leaflet-color-markers-master/js/leaflet-color-markers';
-import { orangeIcon } from './leaflet-color-markers-master/js/leaflet-color-markers';
-import { redIcon } from './leaflet-color-markers-master/js/leaflet-color-markers';
+import { goldIcon, greenIcon, greyIcon, orangeIcon, redIcon } from './leaflet-color-markers-master/js/leaflet-color-markers';
 
 // uses leaflet to display coordinates on a map
 function MapDisplay({ coordinates, landmarks, center }) {
-  const LANDMARK_ICONS = [goldIcon, greenIcon, greyIcon, orangeIcon, redIcon]
+  const mapRef = useRef(null);
+  const LANDMARK_ICONS = [goldIcon, greenIcon, greyIcon, orangeIcon, redIcon];
+
+  useEffect(() => {
+    if (mapRef.current) {
+      mapRef.current.scrollIntoView({ behavior: 'smooth', block: 'end' });
+    }
+  }, [coordinates, center]);
 
   if (coordinates.length > 0 && center.length > 0) {
     return (
-      <div className={styles.mapDisplay} id = "map">
+      <div className={styles.mapDisplay} id="map" ref={mapRef}>
         <h2 className='text-4xl font-bold'>Map Preview:</h2>
         <div>coordinates: {coordinates[0]}, {coordinates[1]}</div>
         <MapContainer
