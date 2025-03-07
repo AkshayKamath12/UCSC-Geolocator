@@ -8,6 +8,7 @@
   box-sizing: border-box;
   gap: 16px;
   text-align: center;
+  border-top: 1px solid #ccc; /* Add a small border to the top */
 }
 
 .mapContainer {

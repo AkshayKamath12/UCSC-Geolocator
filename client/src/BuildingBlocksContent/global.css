@@ -1,7 +1,7 @@
 :root {
   --primary-color: #333333;
-  --secondary-color: #666666;
-  --background-color: #ffffff;
+  --secondary-color: #f5f5f5;
+  --background-color: #76ac6d;
   --font-family-primary: 'Roboto', sans-serif;
 }
 
@@ -13,5 +13,5 @@
 
 body {
   font-family: var(--font-family-primary);
-  background-color: var(--background-color);
+  background: linear-gradient(to bottom, var(--background-color), #ffffff);
 }

@@ -4,8 +4,10 @@ import styles from './BuildingBlocksContent.module.css';
 
 const BuildingBlocksContent = () => {
   return (
-    <div className={styles.container}>
-      <Header />
+    <div className={styles.wrapper}>
+      <div className={styles.container}>
+        <Header />
+      </div>
     </div>
   );
 };

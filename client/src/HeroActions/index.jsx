@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import styles from './HeroActions.module.css';
 
 function HeroActions({
@@ -15,12 +15,21 @@ function HeroActions({
 }) {
   const [preview, setPreview] = useState(null);
   const [isDragOver, setIsDragOver] = useState(false);
+  const [isSubmitted, setIsSubmitted] = useState(false);
+  const previewRef = useRef(null);
+
+  useEffect(() => {
+    if (previewRef.current) {
+      previewRef.current.scrollIntoView({ behavior: 'smooth', block: 'end' });
+    }
+  }, [preview]);
 
   const handleImageChange = async (e) => {
     const selectedFile = e.target.files[0];
     if (selectedFile) {
       setFile(selectedFile);
       setPreview(URL.createObjectURL(selectedFile));
+      setIsSubmitted(false); // Reset submission status
     }
   };
 
@@ -40,6 +49,7 @@ function HeroActions({
     if (selectedFile) {
       setFile(selectedFile);
       setPreview(URL.createObjectURL(selectedFile));
+      setIsSubmitted(false); // Reset submission status
     }
   };
 
@@ -56,6 +66,7 @@ function HeroActions({
       if (data.prediction) {
         console.log(data.prediction);
         setCoordinates(data.prediction);
+        setIsSubmitted(true); // Set submission status to true
       }
     } catch (err) {
       console.log(err);
@@ -64,7 +75,7 @@ function HeroActions({
 
   return (
     <div
-      className={`${styles.heroActions} ${isDragOver ? styles.dragover : ''}`}
+      className={`${styles.heroActions} ${isDragOver ? styles.dragover : ''} ${isSubmitted ? styles.submitted : styles.notSubmitted}`}
       onDragOver={handleDragOver}
       onDragLeave={handleDragLeave}
       onDrop={handleDrop}
@@ -85,7 +96,7 @@ function HeroActions({
         </label>
       </div>
       {preview && (
-        <div className={styles.previewContainer} id="submit">
+        <div className={styles.previewContainer} id="submit" ref={previewRef}>
           <img src={preview} alt="Preview" className={styles.previewImage} />
           <div className={`${styles.buttonGroup} ${buttonGroupAlign}`}>
             <button

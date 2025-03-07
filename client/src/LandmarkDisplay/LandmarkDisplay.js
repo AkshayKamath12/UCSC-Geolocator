@@ -8,7 +8,7 @@ function LandmarkDisplay({ landmarks, setCenter }) {
   if (landmarks.length > 0) {
     console.log(landmarks[0][1]);
     return (
-      <div className='flex flex-col justify-center h-full p-4'>
+      <div className='flex flex-col justify-center h-full p-4' style={{ borderTop: '1px solid #ccc' }}>
         <h2 className='text-4xl font-bold mb-[2vh] text-center'>Nearby Landmarks</h2>
         <table className='shadow-lg bg-white'>
           <thead>
