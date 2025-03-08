@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import styles from './HeroActions.module.css';
 
 function HeroActions({
@@ -17,12 +17,28 @@ function HeroActions({
   const [isDragOver, setIsDragOver] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const previewRef = useRef(null);
+  const dragCounter = useRef(0);
 
   useEffect(() => {
     if (previewRef.current) {
       previewRef.current.scrollIntoView({ behavior: 'smooth', block: 'end' });
     }
   }, [preview]);
+
+  useEffect(() => {
+    const handleWindowDragLeave = (e) => {
+      if (e.screenX === 0 && e.screenY === 0) {
+        dragCounter.current = 0;
+        setIsDragOver(false);
+      }
+    };
+
+    window.addEventListener('dragleave', handleWindowDragLeave);
+
+    return () => {
+      window.removeEventListener('dragleave', handleWindowDragLeave);
+    };
+  }, []);
 
   const handleImageChange = async (e) => {
     const selectedFile = e.target.files[0];
@@ -35,15 +51,26 @@ function HeroActions({
 
   const handleDragOver = (e) => {
     e.preventDefault();
-    setIsDragOver(true);
+    e.stopPropagation();
+    dragCounter.current++;
+    if (dragCounter.current === 1) {
+      setIsDragOver(true);
+    }
   };
 
-  const handleDragLeave = () => {
-    setIsDragOver(false);
+  const handleDragLeave = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    dragCounter.current--;
+    if (dragCounter.current === 0) {
+      setIsDragOver(false);
+    }
   };
 
   const handleDrop = (e) => {
     e.preventDefault();
+    e.stopPropagation();
+    dragCounter.current = 0;
     setIsDragOver(false);
     const selectedFile = e.dataTransfer.files[0];
     if (selectedFile) {
@@ -64,7 +91,6 @@ function HeroActions({
       });
       const data = await response.json();
       if (data.prediction) {
-        console.log(data.prediction);
         setCoordinates(data.prediction);
         setIsSubmitted(true); // Set submission status to true
       }
@@ -75,25 +101,27 @@ function HeroActions({
 
   return (
     <div
-      className={`${styles.heroActions} ${isDragOver ? styles.dragover : ''} ${isSubmitted ? styles.submitted : styles.notSubmitted}`}
+      className={styles.heroActions}
       onDragOver={handleDragOver}
       onDragLeave={handleDragLeave}
       onDrop={handleDrop}
     >
-      <div className={styles.textContentTitle}>
-        <h1 className={styles.title}>{textContentTitleTitle}</h1>
-        <p className={styles.subtitle}>{textContentTitleSubtitle}</p>
-      </div>
-      <div className={`${styles.buttonGroup} ${buttonGroupAlign}`}>
-        <label className={`${styles.button} ${buttonGroupButtonClassName} ${buttonGroupButtonClassNameOverride}`}>
-          <input
-            type="file"
-            accept="image/*"
-            onChange={handleImageChange}
-            style={{ display: 'none' }}
-          />
-          {buttonGroupText}
-        </label>
+      <div className={`${styles.card} ${isDragOver ? styles.dragover : ''} ${preview ? styles.preview : ''} ${isSubmitted ? styles.submitted : styles.notSubmitted}`}>
+        <div className={styles.textContentTitle}>
+          <h1 className={styles.title}>{textContentTitleTitle}</h1>
+          <p className={styles.subtitle}>{textContentTitleSubtitle}</p>
+        </div>
+        <div className={`${styles.buttonGroup} ${buttonGroupAlign}`}>
+          <label className={`${styles.button} ${buttonGroupButtonClassName} ${buttonGroupButtonClassNameOverride}`}>
+            <input
+              type="file"
+              accept="image/*"
+              onChange={handleImageChange}
+              style={{ display: 'none' }}
+            />
+            {buttonGroupText}
+          </label>
+        </div>
       </div>
       {preview && (
         <div className={styles.previewContainer} id="submit" ref={previewRef}>

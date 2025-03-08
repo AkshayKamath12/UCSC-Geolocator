@@ -12,7 +12,9 @@ function MapDisplay({ coordinates, landmarks, center }) {
 
   useEffect(() => {
     if (mapRef.current) {
-      mapRef.current.scrollIntoView({ behavior: 'smooth', block: 'end' });
+      setTimeout(() => {
+        mapRef.current.scrollIntoView({ behavior: 'smooth', block: 'end' });
+      }, 250); // 500ms delay
     }
   }, [coordinates, center]);
 

@@ -13,20 +13,58 @@
   font-size: 72px;
   color: #1e1e1e;
   font-family: 'Inter', sans-serif;
-  border: 4px dashed; /* Thicker border */
 }
 
-.heroActions.notSubmitted {
-  border-color: transparent; /* No border when not submitted */
+.card.notSubmitted {
+  outline: none; /* No outline when not submitted */
 }
 
-.heroActions.submitted {
-  border-color: hsla(120, 100%, 25%, 0.500); /* Green border when submitted */
+.card.submitted {
+  position: relative;
+  padding: 24px;
 }
 
-.heroActions.dragover {
-  border-color: rgba(255, 204, 0, 0.634); /* Yellow border when dragging over */
-  background-color: rgba(0, 0, 0, 0.1); /* Add a semi-transparent black tint */
+.card.preview::before {
+  content: '';
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  right: 10px;
+  bottom: 10px;
+  border: 4px dashed hsla(149, 91%, 42%, 0.5); /* Green dashed border */
+  border-radius: 12px; /* Rounded edges */
+  pointer-events: none; /* Ensure the border does not interfere with interactions */
+}
+
+.card.dragover {
+  position: relative;
+  padding: 24px;
+  background-color: rgba(0, 0, 0, 0.05); /* Add a semi-transparent black tint */
+}
+
+.card.dragover::before {
+  content: '';
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  right: 10px;
+  bottom: 10px;
+  border: 4px dashed rgba(255, 204, 0, 0.634); /* Yellow dashed border */
+  border-radius: 12px; /* Rounded edges */
+  pointer-events: none; /* Ensure the border does not interfere with interactions */
+}
+
+.card::before {
+  content: '';
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  right: 10px;
+  bottom: 10px;
+  border: 4px dashed lightgrey; /* Light grey dashed border */
+  border-radius: 12px; /* Rounded edges */
+  pointer-events: none; /* Ensure the border does not interfere with interactions */
+  box-sizing: border-box; /* Ensure the border is included in the element's dimensions */
 }
 
 .textContentTitle {
@@ -53,11 +91,11 @@
 }
 
 .buttonGroup {
-  width: 240px;
+  width: 100%; /* Make the button group take full width */
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: center;
+  justify-content: center; /* Center the buttons horizontally */
   gap: 16px;
   text-align: left;
   font-size: 16px;
@@ -121,4 +159,20 @@
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   margin-bottom: 35px; /* Add margin-bottom to space the image and button */
+}
+
+.card {
+  background-color: white;
+  border-radius: 16px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 24px;
+  width: 90%; /* Make the card width responsive */
+  max-width: 800px; /* Set a maximum width */
+  margin: 0 auto;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative; /* Ensure the card has relative positioning */
 }
