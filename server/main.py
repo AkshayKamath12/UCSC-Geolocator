@@ -20,7 +20,7 @@ COORDINATES = set_data()
 
 # Get the directory of the current script
 script_dir = os.path.dirname(os.path.abspath(__file__))
-model_path = os.path.join(script_dir, "kerasFiles/geolocator_epoch_95.keras")
+model_path = os.path.join(script_dir, "kerasFiles/geolocator_epoch_85.keras")
 
 model = keras.models.load_model(model_path)
 
