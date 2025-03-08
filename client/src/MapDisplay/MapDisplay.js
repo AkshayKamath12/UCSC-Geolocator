@@ -21,7 +21,7 @@ function MapDisplay({ coordinates, landmarks, center }) {
   if (coordinates.length > 0 && center.length > 0) {
     return (
       <div className={styles.mapDisplay} id="map" ref={mapRef}>
-        <h2 className='text-4xl font-bold'>You Are Here:</h2>
+        <h2 className='text-4xl font-bold' style={{color: '#000000'}}>You Are Here:</h2>
         <div>At: {coordinates[0]} N, {Math.abs(coordinates[1])} W</div>
         <MapContainer
           key={center}

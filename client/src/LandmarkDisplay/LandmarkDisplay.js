@@ -9,7 +9,7 @@ function LandmarkDisplay({ landmarks, setCenter }) {
     console.log(landmarks[0][1]);
     return (
       <div className='flex flex-col justify-center h-full p-4' style={{ borderTop: '1px solid #ccc' }}>
-        <h2 className='text-4xl font-bold mb-[2vh] text-center'>Nearby Landmarks</h2>
+        <h2 className='text-4xl font-bold mb-[2vh] text-center' style={{color: '#000000'}}>Nearby Landmarks</h2>
         <table className='shadow-lg bg-white'>
           <thead>
             <tr>

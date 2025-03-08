@@ -13,5 +13,6 @@
 
 body {
   font-family: var(--font-family-primary);
-  background: linear-gradient(to bottom, var(--background-color), #ffffff);
+  /*background: linear-gradient(to bottom, var(--background-color), #ffffff);*/
+  background: var(--background-color);
 }
