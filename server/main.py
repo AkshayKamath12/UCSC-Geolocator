@@ -79,7 +79,12 @@ def getNearbyLocationData():
         coordinate = tuple(data)
         #note: change coordinates requested below to be a constant at top of file
         nearest_coordinates = find_closest_coordinates(coordinate, COORDINATES, coordinates_requested=5)
-        res = [[elem[1], get_data_from_redis(elem[1])] for elem in nearest_coordinates]
+        res = []
+        for dist, coord in nearest_coordinates:
+            obj = get_data_from_redis(coord)
+            obj["distance"] = f"{dist:.3f}"
+            res.append([coord, obj])
+        # res = [[elem[1], get_data_from_redis(elem[1])] for elem in nearest_coordinates]
         end = time.time()
         print(f'Time for /getNearbyLocationData endpoint = {end - start}')
         return jsonify({'res': res})

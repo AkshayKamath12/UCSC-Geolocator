@@ -4,6 +4,7 @@ import json
 import os
 import heapq
 from redisData.data import json_data
+from geopy.distance import geodesic as GD
 
 load_dotenv()
 
@@ -46,7 +47,8 @@ def find_closest_coordinates(coordinate, coordinates, coordinates_requested=10):
 
 #simple helper function to get the distance between coordinates
 def calculate_distance(coordinate, coordinate2):
-    return (coordinate[0] - coordinate2[0]) ** 2 + (coordinate[1] - coordinate2[1]) ** 2
+    return float(GD(coordinate, coordinate2).feet)
+    # return (coordinate[0] - coordinate2[0]) ** 2 + (coordinate[1] - coordinate2[1]) ** 2
 
 #gets the JSON data for a given building/landmark coordinate
 def get_data_from_redis(coordinate):

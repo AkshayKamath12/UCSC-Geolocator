@@ -16,6 +16,7 @@ function LandmarkDisplay({ landmarks, setCenter }) {
               <td key='coordinates' className={tableHeadClass}>Coordinates</td>
               <td key='name' className={tableDataClass}>Name</td>
               <td key='description' className={tableDataClass}>Description</td>
+              <td key='distance' className={tableDataClass}>Distance</td>
               <td key='setCenter' className={tableHeadClass}>Button</td> 
             </tr>
           </thead>
@@ -25,6 +26,7 @@ function LandmarkDisplay({ landmarks, setCenter }) {
                 <td key='coordinates' className={tableDataClass}>{marker[0][0]}, {marker[0][1]}</td>
                 <td key='name' className={tableDataClass}>{marker[1]['name']}</td>
                 <td key='description' className={tableDataClass}>{marker[1]['description']}</td>
+                <td key='distance' className={tableDataClass}>{marker[1]['distance']}</td>
                 <td key='setCenter' className={tableDataClass}>
                   <button onClick={()=>setCenter(marker[0])} className={'text-white font-bold py-2 px-4 rounded' + ' ' + tailwindColorClasses[index]}>
                     Find Landmark
