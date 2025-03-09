@@ -18,7 +18,7 @@ function MapDisplay({ coordinates, landmarks, center }) {
   useEffect(() => {
     if (mapRef.current) {
       setTimeout(() => {
-        mapRef.current.scrollIntoView({ behavior: 'smooth', block: 'end' });
+        mapRef.current.scrollIntoView({ behavior: 'smooth'});
       }, 250); // 500ms delay
     }
   }, [coordinates, center]);
@@ -31,7 +31,7 @@ function MapDisplay({ coordinates, landmarks, center }) {
         <MapContainer
           key={center}
           center={center}
-          zoom={17}
+          zoom={18}
           className={styles.mapContainer}
         >
           <TileLayer

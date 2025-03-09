@@ -13,7 +13,7 @@ function App() {
   useEffect(() => {
     const getLandmarkData = async () => {
       try {
-        await fetch('/getNearbyLocationData', {
+        await fetch(process.env.REACT_APP_API_LANDMARKS_URL, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',

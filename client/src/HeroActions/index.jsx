@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useRef } from 'react';
 import styles from './HeroActions.module.css';
 
 function HeroActions({
@@ -13,32 +13,25 @@ function HeroActions({
   setFile,
   file // Add file prop
 }) {
+  async function appears(elementID, timeout=500, scrollToEnd = true) {
+    await new Promise(resolve => setTimeout(resolve, timeout));
+      const element = document.getElementById(elementID);
+      if (element) {
+        if (scrollToEnd){
+          element.scrollIntoView({behavior: "smooth", block: "end"})
+        } else {
+          element.scrollIntoView({behavior: "smooth"})
+        }
+        
+      } 
+  }
+
   const [preview, setPreview] = useState(null);
   const [isDragOver, setIsDragOver] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const previewRef = useRef(null);
   const dragCounter = useRef(0);
 
-  useEffect(() => {
-    if (previewRef.current) {
-      previewRef.current.scrollIntoView({ behavior: 'smooth', block: 'end' });
-    }
-  }, [preview]);
-
-  useEffect(() => {
-    const handleWindowDragLeave = (e) => {
-      if (e.screenX === 0 && e.screenY === 0) {
-        dragCounter.current = 0;
-        setIsDragOver(false);
-      }
-    };
-
-    window.addEventListener('dragleave', handleWindowDragLeave);
-
-    return () => {
-      window.removeEventListener('dragleave', handleWindowDragLeave);
-    };
-  }, []);
 
   const handleImageChange = async (e) => {
     const selectedFile = e.target.files[0];
@@ -46,6 +39,7 @@ function HeroActions({
       setFile(selectedFile);
       setPreview(URL.createObjectURL(selectedFile));
       setIsSubmitted(false); // Reset submission status
+      appears("submit")
     }
   };
 
@@ -85,7 +79,7 @@ function HeroActions({
     imageData.append('image', file);
 
     try {
-      const response = await fetch("/upload", {
+      const response = await fetch(process.env.REACT_APP_API_UPLOAD_URL, {
         method: 'POST',
         body: imageData
       });
