@@ -417,71 +417,95 @@ json_data = [
     {
         'coordinate': (36.99683, -122.05304),
         'name': "Cowell and Stevenson Dining Hall",
-        'description': ""
+        'description': "Dining hall for Cowell and Stevenson students. Cowell Coffee Shop is also located here. "
     },
 
     {
         'coordinate': (36.99736, -122.05222),
         'name': "Cultural Arts and Diversity Resource Center",
-        'description': ""
-    },
-
-    {
-        'coordinate': (36.99725, -122.05169),
-        'name': "Stevenson Classrooms",
-        'description': ""
+        'description': "Also known as CADrc enhances the cultural climate of the University of California, Santa Cruz, and its surrounding communities by first, celebrating diversity."
     },
 
     {
         'coordinate': (36.99714, -122.05147),
-        'name': "Stevenson Library",
-        'description': ""
+        'name': "Adlai E. Stevenson Library",
+        'description': "Study space that is open daily from 8:00 am - 12:00 am. Named after Adlai E. Stevenson who was an ambassador to the United Nations."
     },
+
+    {
+        'coordinate': (36.99703, -122.05246),
+        'name': "UCSC Catering",
+        'description': "For your convenience, University Catering has created a step-by-step guide to use when planning your events"
+    },
+
+
+
+    {
+        'coordinate': (36.99698, -122.05223),
+        'name': "Stevenson Event Center",
+        'description': "The Stevenson Event Center is a venue designed to hold lectures, dinners, theatre performances, and other large scale events"
+    },
+
+
+
+    {
+        'coordinate': (36.99704, -122.05190),
+        'name': "Stevenson Academic Building",
+        'description': "Department of Linguistics and classrooms"
+    },
+
 
     {
         'coordinate': (36.99586, -122.05164),
         'name': "Stevenson Knoll",
-        'description': ""
+        'description': "Park loacted in Stevenson college"
     },
+
+    {
+        'coordinate': (36.99586, -122.05164),
+        'name': "Page Smith Library",
+        'description': "Library named after Page Smith who the found Provost of Cowell College and UCSC. As an activist, he was a lifelong advocate for homeless people, for community organization, and for improving the prison system"
+    },
+
 
     {
         'coordinate': (36.99585, -122.05099),
         'name': "Steve's Bench",
-        'description': ""
+        'description': "Historical landmark"
     },
 
     {
         'coordinate': (36.99564, -122.05142),
         'name': "Stevenson Garden",
-        'description': ""
+        'description': "Community garden by the Stevenson residents."
     },
 
     {
         'coordinate': (36.99429, -122.05285),
         'name': "Opers Field",
-        'description': ""
+        'description': "Open field that has a track, soccer nets, and athletics activites."
     },
 
     {
         'coordinate': (36.99509, -122.05407),
-        'name': "East Gym",
-        'description': ""
+        'name': "East Field house",
+        'description': "The main UCSC sports and recreation building, encompassing a pool, outdoor basketball court, team locker rooms, the UCSC Wellness Center martial arts/dance studios, tennis courts, and OPERS offices."
     },
 
     {
         'coordinate': (36.98371, -122.06106),
         'name': "UCSC Aboretum",
-        'description': ""
+        'description': "Park."
     },
 
     {
         'coordinate': (36.98235, -122.05989),
         'name': "UCSC Aboretum and Botanic Garden",
-        'description': ""
+        'description': "Shop for local art, jewelry, and great gifts, or shop for beautiful plants from our outdoor nursery! Also, visit our world class collection of plants in the garden."
     },
 
     {
-        'coordinate': (36.99887982079151, -122.0662458744743 ),
+        'coordinate': (36.99887, -122.06624 ),
         'name': "Kresge Academic Building/Lecture Hall",
         'description': "Academic Building with a lecture hall,computer lab,and classrooms. "
     },
@@ -609,11 +633,26 @@ json_data = [
         'description': "Convenience store."
     },
 
-{
+    {
         'coordinate': (36.99975 , -122.05746),
         'name': "Cowell Student Health Center",
         'description': "Medical clinic for UCSC student that has with a pharmacy,SHOP services,counseling, psychological services, and more"
     },
+
+
+    {
+        'coordinate': (36.98349, -122.05517),
+        'name': "CASFS Farm And Garden",
+        'description': " A research, education, and public service organization within the Division of Social Sciences. Also, Alan Chadwick Garden  a 3-acre Garden exhibits a diverse collection."
+    },
+
+        {
+        'coordinate': (36.98349, -122.05517),
+        'name': "CASFS Farm And Garden",
+        'description': " A research, education, and public service organization within the Division of Social Sciences. Also, Alan Chadwick Garden  a 3-acre Garden exhibits a diverse collection."
+    },
+
+
 
 
 ]
