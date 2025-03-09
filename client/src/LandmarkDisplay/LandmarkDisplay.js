@@ -14,9 +14,8 @@ function LandmarkDisplay({ landmarks, setCenter }) {
           <thead>
             <tr>
               <td key='coordinates' className={tableHeadClass}>Coordinates</td>
-              {Object.keys(landmarks[0][1]).map((col_name) => (
-                  <td key={col_name} className={tableHeadClass}>{col_name}</td>
-              ))}
+              <td key='name' className={tableDataClass}>Name</td>
+              <td key='description' className={tableDataClass}>Description</td>
               <td key='setCenter' className={tableHeadClass}>Button</td> 
             </tr>
           </thead>
@@ -24,9 +23,8 @@ function LandmarkDisplay({ landmarks, setCenter }) {
             {Object.entries(landmarks).map(([id, marker], index) => (
               <tr key={id}>
                 <td key='coordinates' className={tableDataClass}>{marker[0][0]}, {marker[0][1]}</td>
-                {Object.entries(marker[1]).map(([id, col_name]) => (
-                  <td key={id} className={tableDataClass}>{col_name}</td>
-                ))}
+                <td key='name' className={tableDataClass}>{marker[1]['name']}</td>
+                <td key='description' className={tableDataClass}>{marker[1]['description']}</td>
                 <td key='setCenter' className={tableDataClass}>
                   <button onClick={()=>setCenter(marker[0])} className={'text-white font-bold py-2 px-4 rounded' + ' ' + tailwindColorClasses[index]}>
                     Find Landmark

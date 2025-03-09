@@ -21,8 +21,10 @@ def set_data():
         key = json_location['coordinate']
         arr.append(key)
         val_name = json_location['name']
+        val_description = json_location['description']
         store_data = {
-            "name": val_name
+            "name": val_name,
+            "description": val_description
         }
         r.set(str(key), json.dumps(store_data))
     return arr
