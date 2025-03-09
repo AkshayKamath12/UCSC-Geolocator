@@ -646,11 +646,6 @@ json_data = [
         'description': " A research, education, and public service organization within the Division of Social Sciences. Also, Alan Chadwick Garden  a 3-acre Garden exhibits a diverse collection."
     },
 
-        {
-        'coordinate': (36.98349, -122.05517),
-        'name': "CASFS Farm And Garden",
-        'description': " A research, education, and public service organization within the Division of Social Sciences. Also, Alan Chadwick Garden  a 3-acre Garden exhibits a diverse collection."
-    },
 
 
 
