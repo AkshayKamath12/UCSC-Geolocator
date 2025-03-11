@@ -52,7 +52,7 @@ function MapDisplay({ coordinates, landmarks, center }) {
   } else {
     return (
       <div className={styles.mapDisplay}>
-        <div className={styles.noCoordinates}>No coordinates</div>
+        <div className="w-screen text-center">No coordinates</div>
       </div>
     );
   }

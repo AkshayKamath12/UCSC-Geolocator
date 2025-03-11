@@ -1,14 +1,31 @@
 import React from 'react';
-
+import LandmarkCard from '../LandmarkCard/LandmarkCard';
+import { useState } from 'react';
 // uses leaflet to display coordinates on a map
 function LandmarkDisplay({ landmarks, setCenter }) {
-  const tableDataClass = "p-2 border border-black";
-  const tableHeadClass = "bg-blue-100 border border-black text-center p-2";
+  const [index, setIndex] = useState(0);
   const tailwindColorClasses = ["bg-yellow-400 hover:bg-yellow-300", "bg-green-600 hover:bg-green-400", "bg-gray-400 hover:bg-gray-300", "bg-yellow-700 hover:bg-yellow-400", "bg-red-600 hover:bg-red-400"]
   if (landmarks.length > 0) {
-    console.log(landmarks[0][1]);
+    const marker = Object.entries(landmarks)[index];
     return (
-      <div className='flex flex-col justify-center h-full p-4' style={{ borderTop: '1px solid #ccc' }}>
+      <div className='flex flex-col items-center w-full'>
+        <h2 className="text-4xl font-bold">Near To You</h2>
+        <p className="mb-2">Check these places out!</p>
+        <LandmarkCard landmarksLength={landmarks.length} landmarkName={marker[1][1].name} landmarkDescription={marker[1][1].description} landmarkIndex={index} landmarkChangeIndex={setIndex} buttonColor={tailwindColorClasses[index]} btnFunction={()=>{setCenter(marker[1][0])}}/>
+      </div>
+      
+    );
+  } else {
+    return (
+      <div></div>
+    );
+  }
+}
+
+export default LandmarkDisplay;
+
+/*
+<div className='flex flex-col justify-center h-full p-4' style={{ borderTop: '1px solid #ccc' }}>
         <h2 className='text-4xl font-bold mb-[2vh] text-center' style={{color: '#000000'}}>Nearby Landmarks</h2>
         <table className='shadow-lg bg-white text-center'>
           <thead>
@@ -37,12 +54,6 @@ function LandmarkDisplay({ landmarks, setCenter }) {
           </tbody>
         </table>
       </div>
-    );
-  } else {
-    return (
-      <div></div>
-    );
-  }
-}
 
-export default LandmarkDisplay;
+
+*/

@@ -56,7 +56,7 @@ function App() {
         />
         <div className='flex flex-col md:flex-row'>
           <MapDisplay coordinates={coordinates} landmarks={landmarks} center = {center}/>
-          <div>
+          <div className='flex justify-center items-center h-[800px] md:pr-4 md:w-[30%]'>
             <LandmarkDisplay landmarks={landmarks} setCenter={setCenter}/>  
           </div>
           
@@ -67,3 +67,4 @@ function App() {
   );
 }
 export default App;
+//
