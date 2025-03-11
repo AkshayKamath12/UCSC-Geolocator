@@ -79,7 +79,7 @@ function HeroActions({
     imageData.append('image', file);
 
     try {
-      const response = await fetch(process.env.REACT_APP_API_UPLOAD_URL, {
+      const response = await fetch("/upload", {
         method: 'POST',
         body: imageData
       });
