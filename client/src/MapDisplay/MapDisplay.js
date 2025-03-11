@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef} from 'react';
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import { Icon } from "leaflet";
 import "leaflet/dist/leaflet.css";
@@ -6,8 +6,7 @@ import styles from './MapDisplay.module.css';
 import markerIconPng from "leaflet/dist/images/marker-icon.png"
 import { goldIcon, greenIcon, greyIcon, orangeIcon, redIcon } from './leaflet-color-markers-master/js/leaflet-color-markers';
 
-// uses leaflet to display coordinates on a map
-function MapDisplay({ coordinates, landmarks, center }) {
+function MapDisplay({ coordinates, landmarks, center, setMapHeight }) {
   const mapRef = useRef(null);
   const LANDMARK_ICONS = [goldIcon, greenIcon, greyIcon, orangeIcon, redIcon];
   const predictedIcon = new Icon({
@@ -18,16 +17,19 @@ function MapDisplay({ coordinates, landmarks, center }) {
   useEffect(() => {
     if (mapRef.current) {
       setTimeout(() => {
-        mapRef.current.scrollIntoView({ behavior: 'smooth'});
-      }, 250); // 500ms delay
+        mapRef.current.scrollIntoView({ behavior: 'smooth', block: 'end' });
+        setMapHeight(mapRef.current.clientHeight);
+      }, 250); // 250ms delay
     }
-  }, [coordinates, center]);
+  }, [coordinates, center, setMapHeight]);
 
   if (coordinates.length > 0 && center.length > 0) {
     return (
       <div className={styles.mapDisplay} id="map" ref={mapRef}>
-        <h2 className='text-4xl font-bold' style={{color: '#000000'}}>You Are Here:</h2>
-        <div>At: {coordinates[0]} N, {Math.abs(coordinates[1])} W</div>
+        <div className={styles.header}>
+          <h2 className={styles.title}>You Are Here</h2>
+          <p className={styles.subtitle}>At: {coordinates[0]} N, {Math.abs(coordinates[1])} W</p>
+        </div>
         <MapContainer
           key={center}
           center={center}

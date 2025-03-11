@@ -2,19 +2,19 @@ json_data = [
     {
         'coordinate': (37.00168, -122.05881),
         'name': "Social Sciences 2",
-        'description': "Academic building for psychology classes and research"
+        'description': "Academic building for psychology classes and research."
     },
 
     {
         'coordinate': (37.00100, -122.05773),
         'name': 'College 9/10 Dining Hall',
-        'description': "Dining hall with a cafe/restaurant upstairs"
+        'description': "Dining hall with a cafe/restaurant upstairs."
     },
 
     {
         'coordinate': (37.00241, -122.05719),
         'name': "Social Sciences 1",
-        'description': "Academic building for archaeology classes and research"
+        'description': "Academic building for archaeology classes and research."
     },
 
     {
@@ -26,13 +26,13 @@ json_data = [
     {
         'coordinate': (37.00076, -122.05719),
         'name': "Namaste Lounge",
-        'description': "A student lounge can be used for student organizations events."
+        'description': "A student lounge that can be used for student organizations' events."
     },
 
     {
         'coordinate': (37.00226, -122.05935),
         'name': "College 9/10 Community Room",
-        'description': "Community room for college 9/10 students"
+        'description': "Community room for college 9/10 students."
     },
 
     {
@@ -68,19 +68,19 @@ json_data = [
     {
         'coordinate': (36.99967, -122.06187),
         'name': "Physical Sciences Building",
-        'description': "Contains labs and classrooms for physical science classes.Also, has the department of chemistry and biochemistry and Perk Coffee bar." 
+        'description': "Contains labs and classrooms for physical science classes. Also, has the department of chemistry and biochemistry and Perk Coffee bar." 
     },
 
     {
         'coordinate': (36.99915, -122.06074),
         'name': "Science and Engineering Library",
-        'description': "Univeristy Library with study rooms,video gaming lab,Digital Scholarship Innovation Studio, and East Asian Collection  "
+        'description': "University Library with study rooms,video gaming lab,Digital Scholarship Innovation Studio, and East Asian Collection  "
     },
 
     {
         'coordinate': (36.99882, -122.06166),
         'name': "Sinsheimer Labs",
-        'description': "A lab that also an academic department for the department of molecular, cell, and developmental biology."
+        'description': "A lab that is also an academic department of molecular, cell, and developmental biology."
     },
 
     {
@@ -92,19 +92,19 @@ json_data = [
     {
         'coordinate': (36.99809, -122.06133),
         'name': "Thimann Lecture Halls",
-        'description': "Lecture for classes"
+        'description': "A larger lecture hall for classes in an auditorium style."
     },
 
     {
         'coordinate': (36.99856, -122.06045),
         'name': "Natural Science Building  2",
-        'description': "This building contians classrooms for students and has Kenneth S. Norris Center for Natural History."
+        'description': "This building contains classrooms for students and has Kenneth S. Norris Center for Natural History."
     },
 
     {
         'coordinate': (36.99863, -122.05978),
         'name': "Interdisciplinary Sciences",
-        'description': "This buidling has the department of Astronomy and Astrophysics Office,department of physics,and Observatories.  "
+        'description': "This building has the department of Astronomy and Astrophysics Office,department of physics,and Observatories."
     },
 
     {
@@ -158,13 +158,13 @@ json_data = [
     {
         'coordinate': (36.99344, -122.05998),
         'name': "Music Classrooms",
-        'description': "UCSC's Music center that contain practice rooms,teaching studios,faculty offices, department offics, and performace studio. "
+        'description': "UCSC's Music center that contains practice rooms,teaching studios,faculty offices, department offices, and performace studio. "
     },
 
     {
         'coordinate': (36.99307, -122.06072),
         'name': "Recital Hall",
-        'description': "An event venue thatbe tuned to customize acoustics for different styles of music and located in the same buidling with the Music department. "
+        'description': "An event venue that can be tuned to customize acoustics for different styles of music and located in the same building with the Music department. "
     },
 
 
@@ -381,13 +381,13 @@ json_data = [
     {
         'coordinate': (36.99694, -122.05502),
         'name': "Cowell Computer Lab",
-        'description': "Computer lab that is open 24 hours and equipped with Mac and PC computers, printers, and scanners."
+        'description': "A Computer lab that is open 24 hours and equipped with Mac and PC computers, printers, and scanners."
     },
 
     {
         'coordinate': (36.99841, -122.05450),
         'name': "Humanities Lecture Hall",
-        'description': "Lecture hall forclasses."
+        'description': "A lecture hall for classes."
     },
 
     {
@@ -458,13 +458,13 @@ json_data = [
     {
         'coordinate': (36.99586, -122.05164),
         'name': "Stevenson Knoll",
-        'description': "Park loacted in Stevenson college"
+        'description': "Park located in Stevenson college."
     },
 
     {
         'coordinate': (36.99586, -122.05164),
         'name': "Page Smith Library",
-        'description': "Library named after Page Smith who the found Provost of Cowell College and UCSC. As an activist, he was a lifelong advocate for homeless people, for community organization, and for improving the prison system"
+        'description': "Library named after Page Smith who was the founding Provost of Cowell College and UCSC. As an activist, he was a lifelong advocate for homeless people, for community organization, and for improving the prison system"
     },
 
 
@@ -483,7 +483,7 @@ json_data = [
     {
         'coordinate': (36.99429, -122.05285),
         'name': "Opers Field",
-        'description': "Open field that has a track, soccer nets, and athletics activites."
+        'description': "Open field that has a track, soccer nets, and athletics activities."
     },
 
     {
@@ -494,13 +494,13 @@ json_data = [
 
     {
         'coordinate': (36.98371, -122.06106),
-        'name': "UCSC Aboretum",
+        'name': "UCSC Arboretum",
         'description': "Park."
     },
 
     {
         'coordinate': (36.98235, -122.05989),
-        'name': "UCSC Aboretum and Botanic Garden",
+        'name': "UCSC Arboretum and Botanic Garden",
         'description': "Shop for local art, jewelry, and great gifts, or shop for beautiful plants from our outdoor nursery! Also, visit our world class collection of plants in the garden."
     },
 
@@ -605,7 +605,7 @@ json_data = [
 
     {
         'coordinate': (36.99774, -122.05550 ),
-        'name': "Bay Tree Campus Buidling ",
+        'name': "Bay Tree Campus Building ",
         'description': "At 2nd floor the STARRS for Services for Transfer Re-Entry and Resilient Scholars.At the 4th floor the UCSC Disability Resource Center (DRC)."
     },
 

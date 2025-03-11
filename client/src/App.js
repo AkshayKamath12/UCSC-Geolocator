@@ -2,18 +2,19 @@ import React, { useState, useEffect } from 'react';
 import BuildingBlocksContent from './BuildingBlocksContent/BuildingBlocksContent';
 import HeroActions from './HeroActions';
 import MapDisplay from './MapDisplay/MapDisplay';
-import LandmarkDisplay from './LandmarkDisplay/LandmarkDisplay'
+import LandmarkDisplay from './LandmarkDisplay/LandmarkDisplay';
 
 function App() {
   const [coordinates, setCoordinates] = useState([]);
   const [file, setFile] = useState(null); // Add state for file
-  const [landmarks, setLandmarks] = useState([]) // stores info about landmarks
-  const [center, setCenter] = useState([]) // coord of center of map
+  const [landmarks, setLandmarks] = useState([]); // stores info about landmarks
+  const [center, setCenter] = useState([]); // coord of center of map
+  const [mapHeight, setMapHeight] = useState(0); // Add state for map height
 
   useEffect(() => {
     const getLandmarkData = async () => {
       try {
-        await fetch('/getNearbyLocationData', {
+        await fetch(process.env.REACT_APP_API_LANDMARKS_URL, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -23,25 +24,23 @@ function App() {
           res => res.json()
         ).then(
           data => {
-            setLandmarks(data.res)
+            setLandmarks(data.res);
           }
-        )
+        );
       } catch (error) {
         console.error('Error getting landmark data:', error);
       }
     };
-    if(coordinates.length > 0){  
-      getLandmarkData()
-      setCenter(coordinates)
+    if (coordinates.length > 0) {  
+      getLandmarkData();
+      setCenter(coordinates);
     }
-    
   }, [coordinates]);
-  
 
   return (
     <div className="App">
       <header className="App-header">
-        <BuildingBlocksContent/>
+        <BuildingBlocksContent />
         <HeroActions
           buttonGroupAlign="center"
           buttonGroupButtonClassName="button1"
@@ -55,15 +54,16 @@ function App() {
           file={file} // Pass file to HeroActions
         />
         <div className='flex flex-col md:flex-row'>
-          <MapDisplay coordinates={coordinates} landmarks={landmarks} center = {center}/>
-          <div>
-            <LandmarkDisplay landmarks={landmarks} setCenter={setCenter}/>  
+          <div className="flex-1 p-2">
+            <MapDisplay coordinates={coordinates} landmarks={landmarks} center={center} setMapHeight={setMapHeight} />
           </div>
-          
+          <div className="flex-3 p-2">
+            <LandmarkDisplay landmarks={landmarks} setCenter={setCenter} mapHeight={mapHeight} />
+          </div>
         </div>
-        
       </header>
     </div>
   );
 }
+
 export default App;

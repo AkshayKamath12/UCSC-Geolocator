@@ -1,0 +1,113 @@
+/* Header section */
+.header {
+  text-align: center;
+}
+
+.title {
+  font-size: 2.25rem; /* text-4xl equivalent */
+  font-weight: 700; /* font-bold equivalent */
+}
+
+.subtitle {
+  font-size: 1rem; /* Match the size of coordinates display */
+}
+/* Container styles */
+.container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    box-sizing: border-box;
+    gap: 16px;
+    text-align: center;
+    padding-right: 20px; /* Make padding symmetric */
+    padding-bottom: 20px;
+    padding-top: 20px;
+}
+/* Card styles */
+.card {
+  background-color: white;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border-radius: 0.5rem;
+  padding: 1rem;
+  height: 800px;
+  width: 100%; /* Add width constraint */
+  max-width: 400px; /* Prevent excessive width on large screens */
+  margin: 0 auto; /* Center the card */
+}
+
+.cardTitle {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+.description {
+  font-size: 1.125rem;
+  margin-bottom: 1rem;
+  max-width: 90%;
+  word-wrap: break-word;
+  overflow-wrap: break-word; /* Added for better browser compatibility */
+  margin-left: auto;
+  margin-right: auto;
+  white-space: normal;
+}
+
+/* Button styles */
+.buttonGroup {
+  margin-top: 0.5rem;
+}
+
+.button {
+  color: white;
+  font-weight: 700;
+  padding: 0.5rem 1rem;
+  border-radius: 0.25rem;
+  border: none;
+  cursor: pointer;
+}
+
+/* Button color variants */
+.buttonYellow {
+  background-color: #facc15;
+}
+.buttonYellow:hover {
+  background-color: #fde047;
+}
+
+.buttonGreen {
+  background-color: #16a34a;
+}
+.buttonGreen:hover {
+  background-color: #4ade80;
+}
+
+.buttonGray {
+  background-color: #9ca3af;
+}
+.buttonGray:hover {
+  background-color: #d1d5db;
+}
+
+.buttonGold {
+  background-color: #a16207;
+}
+.buttonGold:hover {
+  background-color: #facc15;
+}
+
+.buttonRed {
+  background-color: #dc2626;
+}
+.buttonRed:hover {
+  background-color: #f87171;
+}
+
+.buttonBlue {
+  background-color: #3b82f6;
+  margin-left: 1rem;
+}
+.buttonBlue:hover {
+  background-color: #60a5fa;
+}
