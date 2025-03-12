@@ -7,7 +7,7 @@ const Header = () => {
     <div className={styles.headerContainer}>
       <div className={styles.headerContent}>
         <div className={styles.headerTextContainer}>
-          <div className={styles.headerTitle}>Street View Geolocator</div>
+          <div className={styles.headerTitle}>UCSC Geolocator</div>
           <div className={styles.headerSubtitle}>Powered by Google Maps™</div>
         </div>
       </div>
