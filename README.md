@@ -1,4 +1,6 @@
-# How to use app (on windows):
+# How to access the app: https://ucsc-geolocator.vercel.app/
+
+# How to use app locally (on windows):
 
 
 ## Set up redis (must do this before starting Flask server):
