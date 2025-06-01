@@ -1,9 +1,9 @@
-# How to access the app: https://ucsc-geolocator.vercel.app/
+# How to access the deployed app: 
+https://ucsc-geolocator.vercel.app/
 
 # How to use app locally (on windows):
 
-
-## Set up redis (must do this before starting Flask server):
+## Set up redis (must do this before starting Flask server)
 1) Open windows powershell and do ```wsl --install```
 2) For convenience do ```wsl --set-default Ubuntu``` so that you can type wsl to start up the linux environment. Follow the instructions
 3) Open a code editor like VSCode and go to the server directory
@@ -13,17 +13,17 @@
 7) Do ```redis-cli``` and copy the config information into a .env file in this folder. The env file should set HOST to localhost, DATABASE_PORT to the port shown from the command, and DATABASE_NUM to 0
 8) Create a file in this folder called \_\_init\_\_.py so that Flask can recognize getNearby.py
 
-## Backend server:
+## Backend server
 
 1) Open a new terminal and go to the server directory.
 2) Do ```python -m venv myenv```
-3) On windows, do ```myenv/scripts/activate```
+3) Activate the virtual environment through ```myenv/scripts/activate```
 4) Install dependencies through ```pip install -r requirements.txt```
 5) Run ```python model.py``` and make sure geolocator.keras is created in the server directory
 6) Create a folder caled **images** inside server and a folder called **upload** inside images (this is just for temporarily storing uploaded photos)
 7) Run Flask server through ```python main.py```
 
-## Frontend server:
+## Frontend server
 
 1) Open a new terminal and go to the client directory
 2) Install the latest node version if you haven't already done so
